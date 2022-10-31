@@ -20,8 +20,7 @@ function Signup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [security1, setSecurity1] = useState("");
-  const [security2, setSecurity2] = useState("");
+  const [standing, setStanding] = useState("");
 
 
   return (
@@ -32,7 +31,7 @@ function Signup() {
         alignItems={"left"}
         style={{ background: "#F7FADD" }}
       >
-        {/* Left Stack */}
+        {/* Instructions information */}
         <Stack
           sx={{ height: "100vh", width: "90%" }}
           alignItems="flex-start"
@@ -53,7 +52,7 @@ function Signup() {
              
         </div>
 
-        {/* Right Components Stack */}
+        {/* Form Fields Stack */}
         <Box
           p={4}
           sx={{
@@ -66,7 +65,6 @@ function Signup() {
           <Grid
             container
             direction="column"
-            //alignItems="center"
             spacing={2}
             marginTop="5%"
           >
@@ -75,7 +73,6 @@ function Signup() {
             </Stack>
 
             <Stack marginX="15%" width="100%">
-              {/* My Profile Title */}
               <h1 style={{ textAlign: "left", fontWeight: "normal" , color: "#686516"}}>
                 Sign Up
               </h1>
@@ -89,7 +86,7 @@ function Signup() {
                 width="70%"
               >
 
-                {/* Student or Tutor toggle */}
+                {/* Student or tutor toggle */}
                 <ToggleButtonGroup
                 color="primary"
                 exclusive                   
@@ -111,7 +108,7 @@ function Signup() {
                   onChange={(event) => setEmail(event.target.value)} // save email from user input
                 />
 
-                {/* Questionaire 1: What is your favorite sport? */}
+                {/* Class standing dropdown */}
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">
                     Class Standing
@@ -120,7 +117,7 @@ function Signup() {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     label="class"
-                    onClick={(event) => setSecurity1(event.target.innerText)}
+                    onClick={(event) => setStanding(event.target.innerText)}
                   >
                     <MenuItem value={10}>Freshman</MenuItem>
                     <MenuItem value={20}>Sophomore</MenuItem>
@@ -143,7 +140,7 @@ function Signup() {
                   onChange={(event) => setPassword(event.target.value)} // save password from user input
                 />
 
-                {/* Get Started button */}
+                {/* Sign up button */}
             <Button
                   variant="contained"
                   style={{
@@ -158,7 +155,7 @@ function Signup() {
                   Sign Up
                 </Button>
 
-                {/* Log in option */}
+                {/* Sign in button */}
                 <h4 style={{ color: "#686516", marginBottom: "0" }}>
                   Already have an account?
                 </h4>
