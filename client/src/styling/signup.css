@@ -1,0 +1,17 @@
+* {
+    font-family: 'Fira Sans', sans-serif;
+}
+
+h4 {
+    font-weight: 400;
+}
+
+h5 {
+    font-weight: 700;
+}
+
+.divider {
+    float: left;
+    width: 7px; 
+    background-color: #686516;
+}
