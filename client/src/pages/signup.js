@@ -68,7 +68,7 @@ function Signup() {
             direction="column"
             //alignItems="center"
             spacing={2}
-            marginTop="10%"
+            marginTop="5%"
           >
             <Stack width="100%" alignItems="center">
               {/* Logo */}
