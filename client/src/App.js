@@ -4,19 +4,17 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          BoilerTutor
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
-      </header>
+        <h1>BoilerTutor</h1>
+
+        <div className="form">
+          <label>Tutor name:</label>
+          <input type="text" name="tutor"/>
+
+          <label>Subject:</label>
+          <input type="text" name="subject"/>
+
+          <button>Submit</button>
+        </div>
     </div>
   );
 }
