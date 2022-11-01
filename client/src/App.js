@@ -10,7 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Signup />} />
           <Route path="/allusers" element={<Allusers />} />
-        </Routes>a
+        </Routes>
       </Router>
     </div>
   );

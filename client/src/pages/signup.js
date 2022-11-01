@@ -22,6 +22,7 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [classStanding, setStanding] = useState("");
 
+
   const submit = () => {
     Axios.post('http://localhost:3001/api/insert', {
       firstName: firstName, 
@@ -33,7 +34,6 @@ function Signup() {
       alert('successful');
     })
   }
-
 
   return (
     <Container maxWidth="xl" disableGutters="true">
