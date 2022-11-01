@@ -8,19 +8,31 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import { Link } from "@mui/material";
 import '../styling/signup.css';
+import Axios from 'axios';
 
 function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  const [emailAddress, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [standing, setStanding] = useState("");
+  const [classStanding, setStanding] = useState("");
+
+  const submit = () => {
+    Axios.post('http://localhost:3001/api/insert', {
+      firstName: firstName, 
+      lastName: lastName, 
+      emailAddress: emailAddress, 
+      password: password, 
+      classStanding: classStanding
+    }).then(() => {
+      alert('successful');
+    })
+  }
 
 
   return (
@@ -99,13 +111,13 @@ function Signup() {
                 {/* First name field */}
                 <TextField
                   label="First Name"
-                  onChange={(event) => setEmail(event.target.value)} // save email from user input
+                  onChange={(event) => setFirstName(event.target.value)} // save email from user input
                 />
 
                 {/* Last name field */}
                 <TextField
                   label="Last Name"
-                  onChange={(event) => setEmail(event.target.value)} // save email from user input
+                  onChange={(event) => setLastName(event.target.value)} // save email from user input
                 />
 
                 {/* Class standing dropdown */}
@@ -151,6 +163,7 @@ function Signup() {
                     alignItems: "center",
                     fontSize: 15
                   }}
+                  onClick={submit}
                 >
                   Sign Up
                 </Button>
