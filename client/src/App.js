@@ -1,26 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./pages/signup"
+import Allusers from "./pages/allusers"
 
 function App() {
   return (
     <div className = "App">
-      <Signup/>
-      </div>
-      /*
-    <div className="App">
-        <h1>BoilerTutor</h1>
-
-        <div className="form">
-          <label>Tutor name:</label>
-          <input type="text" name="tutor"/>
-
-          <label>Subject:</label>
-          <input type="text" name="subject"/>
-
-          <button>Submit</button>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Signup />} />
+          <Route path="/allusers" element={<Allusers />} />
+        </Routes>a
+      </Router>
     </div>
-    */
   );
 }
 
