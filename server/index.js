@@ -3,6 +3,7 @@ const app = express();
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const db = mysql.createConnection({
     host: 'localhost',
