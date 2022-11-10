@@ -4,6 +4,8 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+app.use(express.static(path.resolve(__dirname, '../client/build')));
+
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -44,6 +46,14 @@ app.post("/api/insert", (req, res) => {
     db.query(sqlInsert, [firstName, lastName, classStanding, emailAddress, password], (err, result) => {
         console.log(result);
     });
+});
+
+app.get("/test", (req, res) => {
+  res.json({ message: "Hello from server!" });
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
 
 app.listen(3001, () => {
