@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 
+const PORT = process.env.PORT || 3001;
+
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -57,6 +59,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
 
-app.listen(3001, () => {
-    console.log("running on port 3001");
+app.listen(PORT, () => {
+    console.log(`running on port ${PORT}`);
 });
