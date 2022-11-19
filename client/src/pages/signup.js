@@ -129,13 +129,13 @@ function Signup() {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     label="class"
-                    onClick={(event) => setStanding(event.target.innerText)}
+                    onChange={(event) => setStanding(event.target.value)}
                   >
-                    <MenuItem value={10}>Freshman</MenuItem>
-                    <MenuItem value={20}>Sophomore</MenuItem>
-                    <MenuItem value={30}>Junior</MenuItem>
-                    <MenuItem value={40}>Senior</MenuItem>
-                    <MenuItem value={50}>Grad Student</MenuItem>
+                    <MenuItem value={1}>Freshman</MenuItem>
+                    <MenuItem value={2}>Sophomore</MenuItem>
+                    <MenuItem value={3}>Junior</MenuItem>
+                    <MenuItem value={4}>Senior</MenuItem>
+                    <MenuItem value={5}>Grad Student</MenuItem>
                   </Select>
                 </FormControl>
 
@@ -184,8 +184,6 @@ function Signup() {
                 >
                   Sign In
                 </Button>
-
-                
               </Stack>
             </Stack>
           </Grid>
