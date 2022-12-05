@@ -8,9 +8,9 @@ const path = require('path');
 const PORT = process.env.PORT || 3001;
 
 const db = mysql.createConnection({
-    host: 'localhost',
+    host: '35.202.200.76',
     user: 'root',
-    password: 'boilertutorpassword',
+    password: 'ZzLDQJgh93WcUk9yqbBgmSfSYspzyA',
     database: 'BoilerTutor' 
 });
 
@@ -45,7 +45,7 @@ app.post("/api/insert", (req, res) => {
     const password = req.body.password;
     const classStanding = req.body.classStanding;
     
-    const sqlInsert = "INSERT INTO Student (firstName, lastName, classStanding, emailAddress, password) VALUES (?,?,?,?,?);"
+    const sqlInsert = "INSERT INTO Student (firstName, lastName, classStanding, email, password) VALUES (?,?,?,?,?);"
     db.query(sqlInsert, [firstName, lastName, classStanding, emailAddress, password], (err, result) => {
         console.log(result);
     });
