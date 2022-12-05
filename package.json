@@ -1,0 +1,32 @@
+{
+  "name": "boilertutor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js",
+    "build": "cd client && npm install && npm run build"
+  },
+  "engines": {
+    "node": "v16.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SQs-Take-No-L/boilertutor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SQs-Take-No-L/boilertutor/issues"
+  },
+  "homepage": "https://github.com/SQs-Take-No-L/boilertutor#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.20",
+    "path": "^0.12.7"
+  }
+}

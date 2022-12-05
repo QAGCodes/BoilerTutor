@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./pages/signup"
 import Allusers from "./pages/allusers"
+import Test from "./pages/test"
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Signup />} />
           <Route path="/allusers" element={<Allusers />} />
+          <Route path="/test" element={<Test />} />
         </Routes>
       </Router>
     </div>
