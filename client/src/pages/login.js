@@ -34,7 +34,7 @@ function Login() {
   */
 
   return (
-    <Container maxWidth="xl" disableGutters="true">
+    <Container maxWidth="true" disableGutters="true">
       <Stack
         direction="row"
         justifyContent="flex-start"
@@ -51,6 +51,8 @@ function Login() {
 
           <h5 align="left" style={{ fontWeight: "bold", marginTop: "40%", marginLeft: "20%", marginRight: "20%", color: "#686516", fontSize: 55, textAlign: "center"}}>
             Welcome to BoilerTutor!
+            <br></br>
+            👋
           </h5>
 
           <h4 align="left" style={{ fontWeight: "normal", marginTop: "-10%", marginLeft: "20%", marginRight: "20%", color: "#686516", fontSize: 20, textAlign: "center"}}>
@@ -110,6 +112,7 @@ function Login() {
                 />
 
                 {/* Sign in button */}
+                <Box textAlign='center'>
                 <Button
                   variant="contained"
                   style={{
@@ -122,11 +125,15 @@ function Login() {
                 >
                   Sign In
                 </Button>
+                </Box>
+
+                <br></br>
 
                 {/* Sign up button */}
                 <h4 style={{ color: "#686516", marginBottom: "0" }}>
-                  Already have an account?
+                  Don't have an account?
                 </h4>
+                <Box textAlign='center'>
                 <Button
                   variant="contained"
                   style={{
@@ -141,6 +148,7 @@ function Login() {
                 >
                   Sign Up
                 </Button>
+                </Box>
 
               </Stack>
             </Stack>
