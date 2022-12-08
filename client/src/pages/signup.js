@@ -101,12 +101,11 @@ function Signup() {
                 {/* Student or tutor toggle */}
                 <Box textAlign='center'>
                 <ToggleButtonGroup
-                color="primary"
                 exclusive                   
                 aria-label="Platform"
                     >
-                    <ToggleButton value="web">Student</ToggleButton>
-                    <ToggleButton value="android">Tutor</ToggleButton>
+                    <ToggleButton style={{ textTransform: "none", fontFamily: "Fira Sans"}} value="web">Student</ToggleButton>
+                    <ToggleButton style={{ textTransform: "none", fontFamily: "Fira Sans"}} value="android">Tutor</ToggleButton>
                     </ToggleButtonGroup>
                     </Box>
 
