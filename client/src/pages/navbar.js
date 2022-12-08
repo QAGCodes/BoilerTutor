@@ -5,6 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Typography from '@mui/material/Typography';
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid"
 
 const navItems = ['Dashboard', 'Past Sessions' ,'Logout'];
 
@@ -16,13 +17,15 @@ function Navbar() {
           <Typography variant="h6" component="div" fontFamily='Fira Sans' sx={{ flexGrow: 0 , fontWeight: 'bold', fontSize: 27}}>
             BoilerTutor
           </Typography>
-          <Box sx={{paddingLeft: 10}}>
-            {navItems.map((item) => (
-              <Button key={item} style={{padding: 15, textTransform: "none", fontFamily: "Fira Sans", color: "white", fontSize: 16}}>
-                {item}
-              </Button>
-            ))}
-          </Box>
+          <Grid container justifyContent="flex-end"> 
+            <Box sx={{paddingLeft: 10}}>
+                {navItems.map((item) => (
+                <Button key={item} style={{padding: 15, textTransform: "none", fontFamily: "Fira Sans", color: "white", fontSize: 16}}>
+                    {item}
+                </Button>
+                ))}
+            </Box>
+          </Grid>
      
         </Toolbar>
         </AppBar>
