@@ -11,14 +11,14 @@ import Axios from "axios";
 //TODO: sidebar addition is needed
 function HomeStudent() {
 
-  /* used to test changing dashboard based on user role (studen/tutor) */
+  /* used to test changing dashboard based on user role (student/tutor) */
   let isTutor = 0;
 
   return (
     <Container maxWidth="xl" disableGutters="true">
       {/* Continer Grid Stack */}
       <Grid container direction="row" spacing={2} marginTop="5%">
-        <Stack marginX="15%" width="100%" direction="row" spacing={68}>
+        <Stack marginX="15%" width="100%" direction="row" spacing={67}>
           <h1
             style={{
               textAlign: "left",
