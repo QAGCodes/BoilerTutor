@@ -18,7 +18,7 @@ function HomeStudent() {
     <Container maxWidth="xl" disableGutters="true">
       {/* Continer Grid Stack */}
       <Grid container direction="row" spacing={2} marginTop="5%">
-        <Stack marginX="15%" width="100%" direction="row" spacing={50}>
+        <Stack marginX="15%" width="100%" direction="row" spacing={68}>
           <h1
             style={{
               textAlign: "left",
@@ -38,7 +38,7 @@ function HomeStudent() {
               backgroundColor: "#D0D4A1",
               textTransform: "none",
               fontFamily: "Fira Sans",
-              fontSize: 15,
+              fontSize: 15
             }}
           >
             Request New
