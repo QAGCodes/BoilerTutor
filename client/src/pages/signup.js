@@ -36,7 +36,7 @@ function Signup() {
   }
 
   return (
-    <Container maxWidth="xl" disableGutters="true">
+    <Container maxWidth="true" disableGutters="true">
       <Stack
         direction="row"
         justifyContent="flex-start"
@@ -99,6 +99,7 @@ function Signup() {
               >
 
                 {/* Student or tutor toggle */}
+                <Box textAlign='center'>
                 <ToggleButtonGroup
                 color="primary"
                 exclusive                   
@@ -107,6 +108,7 @@ function Signup() {
                     <ToggleButton value="web">Student</ToggleButton>
                     <ToggleButton value="android">Tutor</ToggleButton>
                     </ToggleButtonGroup>
+                    </Box>
 
                 {/* First name field */}
                 <TextField
@@ -153,7 +155,8 @@ function Signup() {
                 />
 
                 {/* Sign up button */}
-            <Button
+                <Box textAlign='center'>
+                <Button
                   variant="contained"
                   style={{
                     width: 120,
@@ -167,11 +170,15 @@ function Signup() {
                 >
                   Sign Up
                 </Button>
+                </Box>
+
+                <br></br>
 
                 {/* Sign in button */}
                 <h4 style={{ color: "#686516", marginBottom: "0" }}>
                   Already have an account?
                 </h4>
+                <Box textAlign='center'>
                 <Button
                   variant="contained"
                   style={{
@@ -184,6 +191,7 @@ function Signup() {
                 >
                   Sign In
                 </Button>
+                </Box>
               </Stack>
             </Stack>
           </Grid>
