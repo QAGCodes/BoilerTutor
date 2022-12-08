@@ -23,7 +23,7 @@ function HomeStudent() {
             style={{
               textAlign: "left",
               fontWeight: "normal",
-              color: "#686516",
+              color: "#505e50",
             }}
           >
             My Upcoming Sessions
@@ -35,7 +35,7 @@ function HomeStudent() {
             style={{
               width: 150,
               height: 50,
-              backgroundColor: "#D0D4A1",
+              backgroundColor: "#505e50",
               textTransform: "none",
               fontFamily: "Fira Sans",
               fontSize: 15

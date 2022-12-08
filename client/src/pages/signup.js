@@ -51,11 +51,11 @@ function Signup() {
           spacing={4}
         >
 
-          <h5 align="left" style={{ fontWeight: "bold", marginTop: "40%", marginLeft: "20%", marginRight: "20%", color: "#686516", fontSize: 55, textAlign: "center"}}>
+          <h5 align="left" style={{ fontWeight: "bold", marginTop: "40%", marginLeft: "20%", marginRight: "20%", color: "#505e50", fontSize: 55, textAlign: "center"}}>
             You're almost there!
           </h5>
 
-          <h4 align="left" style={{ fontWeight: "normal", marginTop: "-10%", marginLeft: "20%", marginRight: "20%", color: "#686516", fontSize: 20, textAlign: "center"}}>
+          <h4 align="left" style={{ fontWeight: "normal", marginTop: "-10%", marginLeft: "20%", marginRight: "20%", color: "#505e50", fontSize: 20, textAlign: "center"}}>
             Fill in the following fields to set up your account.
           </h4>
         </Stack>
@@ -85,7 +85,7 @@ function Signup() {
             </Stack>
 
             <Stack marginX="15%" width="100%">
-              <h1 style={{ textAlign: "left", fontWeight: "normal" , color: "#686516"}}>
+              <h1 style={{ textAlign: "left", fontWeight: "normal" , color: "#505e50"}}>
                 Sign Up
               </h1>
 
@@ -159,7 +159,7 @@ function Signup() {
                   variant="contained"
                   style={{
                     width: 120,
-                    backgroundColor: "#D0D4A1",
+                    backgroundColor: "#505e50",
                     textTransform: "none",
                     fontFamily: "Fira Sans",
                     alignItems: "center",
@@ -174,7 +174,7 @@ function Signup() {
                 <br></br>
 
                 {/* Sign in button */}
-                <h4 style={{ color: "#686516", marginBottom: "0" }}>
+                <h4 style={{ color: "#505e50", marginBottom: "0" }}>
                   Already have an account?
                 </h4>
                 <Box textAlign='center'>
@@ -182,7 +182,7 @@ function Signup() {
                   variant="contained"
                   style={{
                     width: 120,
-                    backgroundColor: "#D0D4A1",
+                    backgroundColor: "#505e50",
                     textTransform: "none",
                     fontFamily: "Fira Sans",
                     fontSize: 15
