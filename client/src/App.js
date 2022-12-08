@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Signup from "./pages/signup"
 import Login from "./pages/login"
 import Allusers from "./pages/allusers"
@@ -17,8 +18,11 @@ import HomeTutor from './pages/tutor/homeTutor';
 import PastSessionsTutor from './pages/tutor/pastSessionsTutor';
 
 function App() {
+
+
   return (
     <div className = "App">
+      {hideNavbar}
       <Router>
         <Routes>
           <Route path="/" element={<Signup />} />
