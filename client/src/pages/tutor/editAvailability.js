@@ -14,7 +14,7 @@ function EditAvailability() {
     <Container maxWidth="true" disableGutters="true">
       {/* Continer Grid Stack */}
       <Grid container direction="row" spacing={2} marginTop="5%">
-        <Stack marginX="15%" width="100%" direction="row" spacing={68}>
+        <Stack marginX="15%" width="100%" direction="row" spacing={69}>
           <h1
             style={{
               textAlign: "left",
