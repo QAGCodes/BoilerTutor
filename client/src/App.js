@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Signup from "./pages/signup"
 import Login from "./pages/login"
@@ -20,10 +20,16 @@ import PastSessionsTutor from './pages/tutor/pastSessionsTutor';
 
 function App() {
 
+  const location = useLocation();
+  const hideNavbar =
+    location.pathname === "/" ||
+    location.pathname === "/login" ? null : (
+      <Navbar></Navbar>
+    );
+
   return (
     <div className = "App">
-      <Navbar></Navbar>
-      <Router>
+      {hideNavbar}
         <Routes>
           <Route path="/" element={<Signup />} />
           <Route path="/login" element={<Login />} />
@@ -42,7 +48,7 @@ function App() {
           <Route path="/pastSessionsTutor" element={<PastSessionsTutor />} />
 
         </Routes>
-      </Router>
+      
     </div>
   );
 }
