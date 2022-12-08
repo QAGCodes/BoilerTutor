@@ -12,7 +12,7 @@ import React, { useState, useEffect } from "react";
 import { Container } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import { Link } from "@mui/material";
-import '../styling/signup.css';
+import '../styling/styles.css';
 import Axios from 'axios';
 
 function Login() {

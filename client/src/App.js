@@ -5,6 +5,7 @@ import Signup from "./pages/signup"
 import Login from "./pages/login"
 import Allusers from "./pages/allusers"
 import Test from "./pages/test"
+import Navbar from "./pages/navbar"
 
 // Student's pages
 import HomeStudent from "./pages/student/homeStudent"
@@ -19,10 +20,9 @@ import PastSessionsTutor from './pages/tutor/pastSessionsTutor';
 
 function App() {
 
-
   return (
     <div className = "App">
-      {hideNavbar}
+      <Navbar></Navbar>
       <Router>
         <Routes>
           <Route path="/" element={<Signup />} />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import '../styling/signup.css';
+import '../styling/styles.css';
 import Axios from 'axios';
 
 function Signup() {
