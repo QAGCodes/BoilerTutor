@@ -7,13 +7,39 @@ import { Container } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import { Link } from "@mui/material";
 import Axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Card, CardActionArea, CardContent } from "@mui/material";
 
 function EditAvailability() {
+
+  const availableSessions = [
+    {
+      courseName: "CS 348",
+      timeSlot: "1:00 PM - 2:00 PM",
+      room: "SMTH 108"
+    },
+    {
+      courseName: "CS 354",
+      timeSlot: "9:00 AM - 10:15 AM",
+      room: "MTHW 210"
+    },
+    {
+      courseName: "EAPS 112",
+      timeSlot: "12:00 PM - 1:00 PM",
+      room: "WALC 1055"
+    },
+    {
+      courseName: "CS 408",
+      timeSlot: "11:00 AM - 12:15 PM",
+      room: "LWSN B151"
+    }
+  ];
+
     
   return (
-    <Container maxWidth="true" disableGutters="true">
-      {/* Continer Grid Stack */}
-      <Grid container direction="row" spacing={2} marginTop="5%">
+    <>
+    <Container maxWidth="xl" disableGutters="true">
+    <Grid container direction="row" spacing={2} marginTop="5%">
         <Stack marginX="15%" width="100%" direction="row" spacing={69}>
           <h1
             style={{
@@ -24,8 +50,6 @@ function EditAvailability() {
           >
             My Available Sessions
           </h1>
-
-          {/* Add New button */}
           <Button
             variant="contained"
             style={{
@@ -40,20 +64,140 @@ function EditAvailability() {
             Add New
           </Button>
         </Stack>
+        
 
-        <Stack marginX="15%" width="100%" direction="row" spacing={25} sx={{ border: 1 }}>
-          <h4>Course</h4>
-          <h4> Time</h4>
+        <Stack
+          marginX="10%" width="80%" direction="column" 
 
-          { /* TODO: turn this into a component and dynamically add based on tutor sessions, only accessed by tutor */ }
-          <Stack>
-             <Button>Cancel</Button>
-              : <><Button>Reschedule</Button> <Button>Cancel</Button></>
+        >
+      
+      {availableSessions.map((currentSession) => 
+          <Card
+            sx={{
+              width: "60",
+              height: "100%",
+              bgcolor: "#F7FADD",
+              borderRadius: "16px",
+              boxShadow: 3,
+              alignContent: "center",
+              margin: 1,
+              disableRipple: true
+            }}
+          >
+                <Stack
+                      m={2}
+                      direction={"row"}
+                      justifyContent="space-between"
+                      spacing={4}
+                >
+                  {/* Tutor Name */}
+                  <Card
+                    sx={{
+                      boxShadow: "3",
+                      borderRadius: "16px",
+                      width: "60%",
+                      height: "100%",
+                    }}
+                    disableRipple
+                  >
+                    <CardActionArea
+                      width="100%"
+                      height="100%"
+                    >
+                      <CardContent width="100%" height="1000px">
+                        <Stack
+                          margin="0"
+                          direction="row"
+                          width="100%"
+                          height="100%"
+                          justifyContent="space-evenly"
+                        >
+                          {currentSession.courseName}
+                        </Stack>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
 
-          </Stack>
+                  {/* Time Slot */}
+                  <Card
+                    sx={{
+                      boxShadow: "3",
+                      borderRadius: "16px",
+                      width: "60%",
+                      height: "100%",
+
+                    }}
+                  >
+                    <CardActionArea
+                      width="100%"
+                      height="100%"
+                    >
+                      <CardContent width="100%" height="1000px">
+                        <Stack
+                          margin="0"
+                          direction="row"
+                          width="100%"
+                          height="100%"
+                          justifyContent="space-evenly"
+                        >
+                          {currentSession.timeSlot}
+                        </Stack>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+
+                  {/* Room */}
+                  <Card
+                    sx={{
+                      boxShadow: "3",
+                      borderRadius: "16px",
+                      width: "60%",
+                      height: "100%",
+                    }}
+                  >
+                    <CardActionArea
+                      width="100%"
+                      height="100%"
+                    >
+                      <CardContent width="100%" height="1000px">
+                        <Stack
+                          margin="0"
+                          direction="row"
+                          width="100%"
+                          height="100%"
+                          justifyContent="space-evenly"
+                        >
+                          {currentSession.room}
+                        </Stack>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+
+                  <Button
+                  variant="contained"
+                  style={{
+                    width: 150,
+                    backgroundColor: "#505e50",
+                    textTransform: "none",
+                    fontFamily: "Fira Sans",
+                    fontSize: 12,
+                    borderRadius: "16px"
+                  }}
+                  >
+                    Delete
+                  </Button>
+                </Stack>
+
+
+          </Card>
+      )}
+
+          
         </Stack>
-      </Grid>
-    </Container>
+        </Grid>
+        </Container>
+
+    </>
   );
 }
 

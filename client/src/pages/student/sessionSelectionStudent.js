@@ -36,6 +36,8 @@ function SessionSelectionStudent(props) {
     
   return (
     <>
+    <Container maxWidth="xl" disableGutters="true">
+    <Grid container direction="row" spacing={2} marginTop="5%">
         <Stack marginX="15%" width="100%" direction="row" spacing={69}>
           <h1
             style={{
@@ -177,6 +179,8 @@ function SessionSelectionStudent(props) {
 
           
         </Stack>
+        </Grid>
+        </Container>
 
     </>
   );
