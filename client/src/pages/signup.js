@@ -23,7 +23,6 @@ function Signup() {
   const [classStanding, setStanding] = useState("");
   const [role, setRole] = useState("");
 
-
   const submit = () => {
     Axios.post('http://localhost:3001/api/insert', {
       firstName: firstName, 
@@ -37,9 +36,11 @@ function Signup() {
     })
   }
 
+  const [alignment, setAlignment] = React.useState('');
   const handleRole = (event) => {
     console.log(event.target.value);
     setRole(event.target.value);
+    setAlignment(event.target.value)
   }
 
   return (
@@ -108,14 +109,27 @@ function Signup() {
                 {/* Student or tutor toggle */}
                 <Box textAlign='center'>
                 <ToggleButtonGroup
-                exclusive                   
-                aria-label="Platform"
-                onChange = {handleRole}
+                  value={alignment}
+                  exclusive                   
+                  aria-label="Platform"
+                  onChange = {handleRole}
+                >
+                    <ToggleButton 
+                      style={{ textTransform: "none", fontFamily: "Fira Sans"}} 
+                      value="student"
                     >
-                    <ToggleButton style={{ textTransform: "none", fontFamily: "Fira Sans"}} value="student">Student</ToggleButton>
-                    <ToggleButton style={{ textTransform: "none", fontFamily: "Fira Sans"}} value="tutor">Tutor</ToggleButton>
-                    </ToggleButtonGroup>
-                    </Box>
+                        Student
+                    </ToggleButton>
+
+                    <ToggleButton 
+                      style={{ textTransform: "none", fontFamily: "Fira Sans"}} 
+                      value="tutor"
+                    >
+                        Tutor
+                    </ToggleButton>
+
+                </ToggleButtonGroup>
+                </Box>
 
                 {/* First name field */}
                 <TextField
