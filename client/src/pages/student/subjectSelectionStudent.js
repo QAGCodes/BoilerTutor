@@ -6,10 +6,21 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Axios from "axios";
 
 function SubjectSelectionStudent() {
 
-  const subjects = [ // Hard coded for now, extract from database in future
+  const [subjects, setSubjects] = useState([])
+  const [sub, setSub] = useState("")
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/api/subject').then((response) => {
+            setSubjects(response.data)
+            console.log(response.data)
+        })
+    }, [])
+
+  /*const subjects = [ // Hard coded for now, extract from database in future
     { id: 0, 
       subject: "Math"
     },
@@ -31,7 +42,7 @@ function SubjectSelectionStudent() {
     { id: 6, 
       subject: "Data Structures and Algorithms"
     },
-  ];
+  ];*/
 
   const navigate = useNavigate();
   const [selection, setSelection] = useState("");
@@ -40,9 +51,23 @@ function SubjectSelectionStudent() {
   const handleSubmit = (event) => {
     console.log(selection + " onclick submitted value");
 
+    for (var i = 0; i < subjects.length; i++) {
+      if (Number(subjects[i].id) == Number(selection)) {
+        console.log(subjects[i].name + "inside")
+        navigate("/sessionSelectionStudent", {
+          state: {
+            Result: subjects[i].name
+          },
+        });
+        //setSub(subjects[i].name)
+        console.log(sub + "SUB")
+      }
+    }
+
+
     navigate("/sessionSelectionStudent", {
       state: {
-        Result: selection
+        Result: sub
       },
     });
   };
@@ -74,7 +99,7 @@ function SubjectSelectionStudent() {
                 onChange={handleChange}
               >
                 {subjects.map((currentSubject) =>
-                  <MenuItem value={currentSubject.id}>{currentSubject.subject}</MenuItem>
+                  <MenuItem value={currentSubject.id}>{currentSubject.name}</MenuItem>
                 )}
               </Select>
             </FormControl>

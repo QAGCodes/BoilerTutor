@@ -37,6 +37,23 @@ app.get("/api/get", (req, res) => {
     });
 });
 
+/* Querying all data from Subject Table */
+app.get("/api/subject", (req, res) => {
+    const sqlSelect = "SELECT * FROM Subject;";
+    db.query(sqlSelect, (err, result) => {
+        res.send(result);
+    });
+});
+
+/* Query name of subject selected */
+app.get("/api/subjectName", (req, res) => {
+    console.log("req = " + req);
+    const sqlSelect = "SELECT name FROM Subject WHERE id = " + req.body.id;
+    db.query(sqlSelect, (err, result) => {
+        res.send(result);
+    });
+});
+
 app.post("/api/insert", (req, res) => {
 
     const firstName = req.body.firstName;

@@ -14,6 +14,24 @@ function SessionSelectionStudent(props) {
   const location = useLocation();
   const currentSubject = location.state.Result;
 
+  console.log(currentSubject + "lijflsjdflwjeflwejflwejfleiwjflweij")
+
+  /*const findSubjectName = () => {
+    for (var i = 0; i < subjects.length; i++) {
+      if (Number(subjects[i].id) == Number(currentSubject)) {
+        console.log(subjects[i].name)
+        setSub(subjects[i])
+      }
+    }
+  }
+
+  useEffect(() => {
+      Axios.get('http://localhost:3001/api/subject').then((response) => {
+          setSubjects(response.data)
+          console.log(response.data)
+      })
+  }, [])*/
+
   const availableSessions = [
     {
       tutorName: "Joe Biden",
@@ -31,8 +49,6 @@ function SessionSelectionStudent(props) {
       room: "WALC 1055"
     }
   ];
-
-  const array = ["hello", "2", "3"]
     
   return (
     <>
@@ -47,7 +63,7 @@ function SessionSelectionStudent(props) {
             }}
           >
             {/* Change subject placeholder with chosen course */}
-            Available Tutors and Timeslots for {currentSubject} -- query name later
+            Available Tutors and Timeslots for {currentSubject}
           </h1>
         </Stack>
 
@@ -66,7 +82,6 @@ function SessionSelectionStudent(props) {
               boxShadow: 3,
               alignContent: "center",
               margin: 1,
-              disableRipple: true
             }}
           >
                 <Stack
@@ -83,7 +98,6 @@ function SessionSelectionStudent(props) {
                       width: "60%",
                       height: "100%",
                     }}
-                    disableRipple
                   >
                     <CardActionArea
                       width="100%"
