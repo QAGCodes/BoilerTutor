@@ -49,34 +49,24 @@ function SubjectSelectionStudent() {
 
 
   const handleSubmit = (event) => {
-    console.log(selection + " onclick submitted value");
+    console.log(selection + " <- onclick submitted value");
 
     for (var i = 0; i < subjects.length; i++) {
       if (Number(subjects[i].id) == Number(selection)) {
-        console.log(subjects[i].name + "inside")
-        navigate("/sessionSelectionStudent", {
+        console.log(subjects[i].name + " <- chosen value")
+        navigate("/sessionSelectionStudent", { // sends subject info to next page
           state: {
-            Result: subjects[i].name
+            Result: subjects[i]
           },
         });
-        //setSub(subjects[i].name)
-        console.log(sub + "SUB")
       }
     }
 
-
-    navigate("/sessionSelectionStudent", {
-      state: {
-        Result: sub
-      },
-    });
   };
-
   const handleChange = (event) => {
     console.log(event.target.value);
     setSelection(event.target.value);
     console.log(selection + " <-subject id");
-
   };
     
     return (

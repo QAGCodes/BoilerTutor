@@ -12,9 +12,7 @@ import { Card, CardActionArea, CardContent } from "@mui/material";
 function SessionSelectionStudent(props) {
   const navigate = useNavigate();
   const location = useLocation();
-  const currentSubject = location.state.Result;
-
-  console.log(currentSubject + "lijflsjdflwjeflwejflwejfleiwjflweij")
+  const currentSubject = location.state.Result; // all current subject information from subject selection page
 
   /*const findSubjectName = () => {
     for (var i = 0; i < subjects.length; i++) {
@@ -24,7 +22,6 @@ function SessionSelectionStudent(props) {
       }
     }
   }
-
   useEffect(() => {
       Axios.get('http://localhost:3001/api/subject').then((response) => {
           setSubjects(response.data)
@@ -63,7 +60,7 @@ function SessionSelectionStudent(props) {
             }}
           >
             {/* Change subject placeholder with chosen course */}
-            Available Tutors and Timeslots for {currentSubject}
+            Available Tutors and Timeslots for {currentSubject.name}
           </h1>
         </Stack>
 
