@@ -41,12 +41,11 @@ function App() {
           <Route path="/pastSessionsStudent" element={<PastSessionsStudent />} />
           <Route path="/sessionSelectionStudent" element={<SessionSelectionStudent />} />
           <Route path="/subjectSelectionStudent" element={<SubjectSelectionStudent />} />
-        
+
           {/* Tutor pages */}
           <Route path="/editAvailability" element={<EditAvailability />} />
           <Route path="/homeTutor" element={<HomeTutor />} />
           <Route path="/pastSessionsTutor" element={<PastSessionsTutor />} />
-
         </Routes>
       
     </div>
