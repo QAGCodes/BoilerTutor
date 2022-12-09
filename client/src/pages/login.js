@@ -49,13 +49,13 @@ function Login() {
           spacing={4}
         >
 
-          <h5 align="left" style={{ fontWeight: "bold", marginTop: "40%", marginLeft: "20%", marginRight: "20%", color: "#686516", fontSize: 55, textAlign: "center"}}>
+          <h5 align="left" style={{ fontWeight: "bold", marginTop: "40%", marginLeft: "20%", marginRight: "20%", color: "#505e50", fontSize: 55, textAlign: "center"}}>
             Welcome to BoilerTutor!
             <br></br>
             👋
           </h5>
 
-          <h4 align="left" style={{ fontWeight: "normal", marginTop: "-10%", marginLeft: "20%", marginRight: "20%", color: "#686516", fontSize: 20, textAlign: "center"}}>
+          <h4 align="left" style={{ fontWeight: "normal", marginTop: "-10%", marginLeft: "20%", marginRight: "20%", color: "#505e50", fontSize: 20, textAlign: "center"}}>
             To get started, sign in to your account or sign up for one today!
           </h4>
         </Stack>
@@ -85,8 +85,8 @@ function Login() {
             </Stack>
 
             <Stack marginX="15%" width="100%">
-              <h1 style={{ textAlign: "left", fontWeight: "normal" , color: "#686516"}}>
-                Login
+              <h1 style={{ textAlign: "left", fontWeight: "normal" , color: "#505e50"}}>
+                Sign In
               </h1>
 
               {/* Components Stack */}
@@ -117,7 +117,7 @@ function Login() {
                   variant="contained"
                   style={{
                     width: 120,
-                    backgroundColor: "#D0D4A1",
+                    backgroundColor: "#505e50",
                     textTransform: "none",
                     fontFamily: "Fira Sans",
                     fontSize: 15
@@ -130,7 +130,7 @@ function Login() {
                 <br></br>
 
                 {/* Sign up button */}
-                <h4 style={{ color: "#686516", marginBottom: "0" }}>
+                <h4 style={{ color: "#505e50", marginBottom: "0" }}>
                   Don't have an account?
                 </h4>
                 <Box textAlign='center'>
@@ -138,7 +138,7 @@ function Login() {
                   variant="contained"
                   style={{
                     width: 120,
-                    backgroundColor: "#D0D4A1",
+                    backgroundColor: "#505e50",
                     textTransform: "none",
                     fontFamily: "Fira Sans",
                     alignItems: "center",
