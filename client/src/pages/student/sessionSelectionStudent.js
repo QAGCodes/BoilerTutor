@@ -6,41 +6,164 @@ import { Container } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import { Link } from "@mui/material";
 import Axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Card, CardActionArea, CardContent } from "@mui/material";
 
-function SessionSelectionStudent() {
+function SessionSelectionStudent(props) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentSubject = location.state.Result;
+
+  const availableSessions = [
+    {
+      tutorName: "Joe Biden",
+      timeSlot: "3:00 PM - 4:00 PM",
+      room: "BHEE 129"
+    },
+    {
+      tutorName: "Donald Trump",
+      timeSlot: "2:00 PM - 3:00 PM",
+      room: "LWSN B158"
+    },
+    {
+      tutorName: "Kamala Harris",
+      timeSlot: "12:00 PM - 1:00 PM",
+      room: "WALC 1055"
+    }
+  ];
+
+  const array = ["hello", "2", "3"]
     
   return (
-    <Container maxWidth="true" disableGutters="true">
-      {/* Continer Grid Stack */}
-      <Grid container direction="row" spacing={2} marginTop="5%">
+    <>
         <Stack marginX="15%" width="100%" direction="row" spacing={69}>
           <h1
             style={{
               textAlign: "left",
               fontWeight: "normal",
-              color: "#686516",
+              color: "#505e50",
             }}
           >
             {/* Change subject placeholder with chosen course */}
-            Available Tutors and Timeslots for CS348 
+            Available Tutors and Timeslots for {currentSubject} -- query name later
           </h1>
-
         </Stack>
 
-        <Stack marginX="15%" width="100%" direction="row" spacing={30} sx={{ border: 1 }}>
-          <h4> Course </h4> {/* Change to selected course */}
-          <h4> Tutor </h4>
-          <h4> Time </h4>
+        <Stack
+          width="100%" direction="column" 
 
-          { /* TODO: turn this into a component and dynamically add based on tutor sessions, only accessed by tutor */ }
-          <Stack>
-             <Button>Cancel</Button>
-              : <><Button>Reschedule</Button> <Button>Cancel</Button></>
+        >
+      
+      {availableSessions.map((currentSession) => 
+          <Card
+            sx={{
+              width: "60",
+              height: "100%",
+              bgcolor: "#F7FADD",
+              borderRadius: "16px",
+              boxShadow: 3,
+              alignContent: "center",
+              margin: 1
+            }}
+            disableRipple
+          >
+                <Stack
+                      m={2}
+                      direction={"row"}
+                      justifyContent="space-between"
+                      spacing={4}
+                >
+                  {/* Tutor Name */}
+                  <Card
+                    sx={{
+                      boxShadow: "3",
+                      borderRadius: "16px",
+                      width: "60%",
+                      height: "100%",
+                    }}
+                    disableRipple
+                  >
+                    <CardActionArea
+                      width="100%"
+                      height="100%"
+                    >
+                      <CardContent width="100%" height="1000px">
+                        <Stack
+                          margin="0"
+                          direction="row"
+                          width="100%"
+                          height="100%"
+                          justifyContent="space-evenly"
+                        >
+                          {currentSession.tutorName}
+                        </Stack>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
 
-          </Stack>
+                  {/* Time Slot */}
+                  <Card
+                    sx={{
+                      boxShadow: "3",
+                      borderRadius: "16px",
+                      width: "60%",
+                      height: "100%",
+
+                    }}
+                  >
+                    <CardActionArea
+                      width="100%"
+                      height="100%"
+                    >
+                      <CardContent width="100%" height="1000px">
+                        <Stack
+                          margin="0"
+                          direction="row"
+                          width="100%"
+                          height="100%"
+                          justifyContent="space-evenly"
+                        >
+                          {currentSession.timeSlot}
+                        </Stack>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+
+                  {/* Room */}
+                  <Card
+                    sx={{
+                      boxShadow: "3",
+                      borderRadius: "16px",
+                      width: "60%",
+                      height: "100%",
+                    }}
+                  >
+                    <CardActionArea
+                      width="100%"
+                      height="100%"
+                    >
+                      <CardContent width="100%" height="1000px">
+                        <Stack
+                          margin="0"
+                          direction="row"
+                          width="100%"
+                          height="100%"
+                          justifyContent="space-evenly"
+                        >
+                          {currentSession.room}
+                        </Stack>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Stack>
+
+          </Card>
+      )}
+
+          
         </Stack>
-      </Grid>
-    </Container>
+
+    </>
   );
 }
 

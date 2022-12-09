@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function SubjectSelectionStudent() {
 
@@ -32,15 +33,25 @@ function SubjectSelectionStudent() {
     },
   ];
 
+  const navigate = useNavigate();
   const [selection, setSelection] = useState("");
+
+
   const handleSubmit = (event) => {
     console.log(selection + " onclick submitted value");
+
+    navigate("/sessionSelectionStudent", {
+      state: {
+        Result: selection
+      },
+    });
   };
 
   const handleChange = (event) => {
     console.log(event.target.value);
     setSelection(event.target.value);
     console.log(selection + " <-subject id");
+
   };
     
     return (
@@ -74,7 +85,7 @@ function SubjectSelectionStudent() {
               variant="contained"
               style={{
                 width: 150,
-                backgroundColor: "#686516",
+                backgroundColor: "#505e50",
                 textTransform: "none",
                 fontFamily: "Fira Sans",
                 alignItems: "center",
