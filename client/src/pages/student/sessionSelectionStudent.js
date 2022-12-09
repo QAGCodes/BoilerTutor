@@ -13,22 +13,36 @@ function SessionSelectionStudent(props) {
   const navigate = useNavigate();
   const location = useLocation();
   const currentSubject = location.state.Result; // all current subject information from subject selection page
+  const [availableSessions, setAvailableSessions] = useState([])
 
-  /*const findSubjectName = () => {
-    for (var i = 0; i < subjects.length; i++) {
-      if (Number(subjects[i].id) == Number(currentSubject)) {
-        console.log(subjects[i].name)
-        setSub(subjects[i])
-      }
-    }
-  }
   useEffect(() => {
-      Axios.get('http://localhost:3001/api/subject').then((response) => {
+      /*Axios.get('http://localhost:3001/api/subject').then((response) => {
           setSubjects(response.data)
           console.log(response.data)
-      })
-  }, [])*/
+      })*/
 
+      Axios.get('http://localhost:3001/api/sessionSelection', 
+      {
+        params: {
+          selectedSubject: currentSubject.id
+        }
+      }).then((response) => {
+        console.log(response.data)
+        setAvailableSessions(response.data)
+      })
+  }, [])
+
+  /*useEffect(() => {
+    Axios.get('http://localhost:3001/api/availableSessions', 
+    {
+      params: {
+        selectedSubject: currentSubject.id
+      }
+    }).then((response) => {
+      console.log(response.data)
+      setAvailableSessions(response.data)
+    })
+  }, []) 
   const availableSessions = [
     {
       tutorName: "Joe Biden",
@@ -45,7 +59,7 @@ function SessionSelectionStudent(props) {
       timeSlot: "12:00 PM - 1:00 PM",
       room: "WALC 1055"
     }
-  ];
+  ]; */
     
   return (
     <>
@@ -108,7 +122,7 @@ function SessionSelectionStudent(props) {
                           height="100%"
                           justifyContent="space-evenly"
                         >
-                          {currentSession.tutorName}
+                          {currentSession.tutorId}
                         </Stack>
                       </CardContent>
                     </CardActionArea>
@@ -136,7 +150,7 @@ function SessionSelectionStudent(props) {
                           height="100%"
                           justifyContent="space-evenly"
                         >
-                          {currentSession.timeSlot}
+                          {currentSession.startTime} - {currentSession.endTime} 
                         </Stack>
                       </CardContent>
                     </CardActionArea>

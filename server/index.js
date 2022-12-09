@@ -57,16 +57,19 @@ app.get("/api/availableSessions", (req, res) => {
     });
 });
 
-/* TO DO: Query sessions for the subject */
-/*
-app.get("/api/subjectName", (req, res) => {
-    console.log("req = " + req);
-    const sqlSelect = "SELECT name FROM Subject WHERE id = " + req.body.id;
-    db.query(sqlSelect, (err, result) => {
+/* Query sessions for the subject */
+app.get("/api/sessionSelection", (req, res) => {
+    const currentSubject = req.query.selectedSubject;
+    console.log(currentSubject);
+
+    const sqlSelect = 
+        "SELECT * FROM Session WHERE subjectId = ?"
+        /*"JOIN Tutor ON Session.tutorId = Tutor.id"*/
+    db.query(sqlSelect, [currentSubject], (err, result) => {
         res.send(result);
     });
 });
-*/
+
 
 app.post("/api/insert", (req, res) => {
 
