@@ -1,0 +1,17 @@
+.MuiCard-root {
+    padding: 20px;
+}
+
+.MuiPaper-root {
+    background-color: #f8fadc;
+    border-color: #9c9b65;
+    border-width: 2px;
+    border-radius: 0px;
+}
+
+containerText {
+    float: left;
+    font-size: x-large;
+    font-weight: bold;
+    font-style: italic;
+}
