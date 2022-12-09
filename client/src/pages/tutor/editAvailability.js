@@ -12,6 +12,26 @@ import { Card, CardActionArea, CardContent } from "@mui/material";
 
 function EditAvailability() {
 
+  /* Change to be dynamic based on the current tutor who is logged in, currently Michelle */
+  const tutorId = 1;
+
+  const [sessions, setAvailableSessions] = useState([])
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/api/availableSessions', 
+        {
+          params: {
+            tutorId: tutorId
+          }
+        }).then((response) => {
+          console.log(response.data)
+          setAvailableSessions(response.data)
+        })
+    }, [])
+
+
+
+    /*
   const availableSessions = [
     {
       courseName: "CS 348",
@@ -34,6 +54,7 @@ function EditAvailability() {
       room: "LWSN B151"
     }
   ];
+  */
 
     
   return (
@@ -71,7 +92,7 @@ function EditAvailability() {
 
         >
       
-      {availableSessions.map((currentSession) => 
+      {sessions.map((currentSession) => 
           <Card
             sx={{
               width: "60",
@@ -112,7 +133,7 @@ function EditAvailability() {
                           height="100%"
                           justifyContent="space-evenly"
                         >
-                          {currentSession.courseName}
+                          {currentSession.subjectId}
                         </Stack>
                       </CardContent>
                     </CardActionArea>
@@ -140,7 +161,7 @@ function EditAvailability() {
                           height="100%"
                           justifyContent="space-evenly"
                         >
-                          {currentSession.timeSlot}
+                          {currentSession.startTime} - {currentSession.endTime}
                         </Stack>
                       </CardContent>
                     </CardActionArea>

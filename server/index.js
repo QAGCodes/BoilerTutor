@@ -45,7 +45,20 @@ app.get("/api/subject", (req, res) => {
     });
 });
 
-/* Query name of subject selected */
+/* Query sessions based on tutor id */
+app.get("/api/availableSessions", (req, res) => {
+    const currentTutor = req.query.tutorId;
+    console.log(currentTutor);
+
+    console.log("req = " + req);
+    const sqlGet = "SELECT * FROM Session WHERE tutorId = ?";
+    db.query(sqlGet, [currentTutor], (err, result) => {
+        res.send(result);
+    });
+});
+
+/* TO DO: Query sessions for the subject */
+/*
 app.get("/api/subjectName", (req, res) => {
     console.log("req = " + req);
     const sqlSelect = "SELECT name FROM Subject WHERE id = " + req.body.id;
@@ -53,6 +66,7 @@ app.get("/api/subjectName", (req, res) => {
         res.send(result);
     });
 });
+*/
 
 app.post("/api/insert", (req, res) => {
 
