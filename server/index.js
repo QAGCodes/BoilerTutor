@@ -75,11 +75,20 @@ app.post("/api/insert", (req, res) => {
     const emailAddress = req.body.emailAddress;
     const password = req.body.password;
     const classStanding = req.body.classStanding;
-    
-    const sqlInsert = "INSERT INTO Student (firstName, lastName, classStanding, email, password) VALUES (?,?,?,?,?);"
-    db.query(sqlInsert, [firstName, lastName, classStanding, emailAddress, password], (err, result) => {
-        console.log(result);
-    });
+    const role = req.body.role;
+
+    /* Determine if user signing up is a student or tutor */
+    if (role == "student") {
+        const sqlInsert = "INSERT INTO Student (firstName, lastName, classStanding, email, password) VALUES (?,?,?,?,?);"
+        db.query(sqlInsert, [firstName, lastName, classStanding, emailAddress, password], (err, result) => {
+            console.log(result);
+        });
+    } else if (role == "tutor") {
+        const sqlInsert = "INSERT INTO Tutor (password, firstName, lastName, classStanding, email) VALUES (?,?,?,?,?);"
+        db.query(sqlInsert, [password, firstName, lastName, classStanding, emailAddress], (err, result) => {
+            console.log(result);
+        });
+    }
 });
 
 app.get("/test", (req, res) => {

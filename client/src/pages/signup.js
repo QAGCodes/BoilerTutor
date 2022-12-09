@@ -21,6 +21,7 @@ function Signup() {
   const [emailAddress, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [classStanding, setStanding] = useState("");
+  const [role, setRole] = useState("");
 
 
   const submit = () => {
@@ -29,10 +30,16 @@ function Signup() {
       lastName: lastName, 
       emailAddress: emailAddress, 
       password: password, 
-      classStanding: classStanding
+      classStanding: classStanding,
+      role: role
     }).then(() => {
       alert('successful');
     })
+  }
+
+  const handleRole = (event) => {
+    console.log(event.target.value);
+    setRole(event.target.value);
   }
 
   return (
@@ -103,9 +110,10 @@ function Signup() {
                 <ToggleButtonGroup
                 exclusive                   
                 aria-label="Platform"
+                onChange = {handleRole}
                     >
-                    <ToggleButton style={{ textTransform: "none", fontFamily: "Fira Sans"}} value="web">Student</ToggleButton>
-                    <ToggleButton style={{ textTransform: "none", fontFamily: "Fira Sans"}} value="android">Tutor</ToggleButton>
+                    <ToggleButton style={{ textTransform: "none", fontFamily: "Fira Sans"}} value="student">Student</ToggleButton>
+                    <ToggleButton style={{ textTransform: "none", fontFamily: "Fira Sans"}} value="tutor">Tutor</ToggleButton>
                     </ToggleButtonGroup>
                     </Box>
 
