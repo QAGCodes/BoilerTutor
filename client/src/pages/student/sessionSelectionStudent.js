@@ -50,7 +50,7 @@ function SessionSelectionStudent(props) {
         </Stack>
 
         <Stack
-          width="100%" direction="column" 
+          marginX="10%" width="80%" direction="column" 
 
         >
       
@@ -63,9 +63,9 @@ function SessionSelectionStudent(props) {
               borderRadius: "16px",
               boxShadow: 3,
               alignContent: "center",
-              margin: 1
+              margin: 1,
+              disableRipple: true
             }}
-            disableRipple
           >
                 <Stack
                       m={2}
@@ -155,7 +155,22 @@ function SessionSelectionStudent(props) {
                       </CardContent>
                     </CardActionArea>
                   </Card>
+
+                  <Button
+                  variant="contained"
+                  style={{
+                    width: 150,
+                    backgroundColor: "#505e50",
+                    textTransform: "none",
+                    fontFamily: "Fira Sans",
+                    fontSize: 12,
+                    borderRadius: "16px"
+                  }}
+                  >
+                    Select
+                  </Button>
                 </Stack>
+
 
           </Card>
       )}
