@@ -135,6 +135,14 @@ app.post("/api/addNew", (req, res) => {
     });
 });
 
+app.delete("/api/deleteSession", (req, res) => {
+    const session = req.body.id;
+    const sqlDelete = "DELETE FROM Session WHERE id = ?";
+    db.query(sqlDelete, [session], (err, result) => {
+        console.log(result);
+    });
+});
+
 
 app.post("/api/insert", (req, res) => {
 

@@ -36,6 +36,15 @@ function EditAvailability() {
     navigate("/addNew");
   };
 
+  const deleteSession = (deletionId) => {
+    Axios.delete('http://localhost:3001/api/deleteSession',
+    {
+      data: {
+        id: deletionId
+      },
+    })
+  };
+
 
 
     /*
@@ -203,6 +212,7 @@ function EditAvailability() {
                   </Card>
 
                   <Button
+                  type="button"
                   variant="contained"
                   style={{
                     width: 150,
@@ -212,6 +222,7 @@ function EditAvailability() {
                     fontSize: 12,
                     borderRadius: "16px"
                   }}
+                  onClick={() => deleteSession(currentSession.id)}
                   >
                     Delete
                   </Button>
