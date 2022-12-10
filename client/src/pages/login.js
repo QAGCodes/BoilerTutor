@@ -14,24 +14,59 @@ import Grid from "@mui/material/Grid";
 import { Link } from "@mui/material";
 import '../styling/styles.css';
 import Axios from 'axios';
+import {useNavigate} from 'react-router-dom';
+
 
 function Login() {
-  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+   const navigate = useNavigate();
 
-  /*
-  const submit = () => {
-    Axios.post('http://localhost:3001/api/insert', {
-      firstName: firstName, 
-      lastName: lastName, 
-      emailAddress: emailAddress, 
-      password: password, 
-      classStanding: classStanding
-    }).then(() => {
-      alert('successful');
+
+  const submit = (e) => {
+    e.preventDefault();
+    Axios.get('http://localhost:3001/api/auth', {
+      params: {
+      email: email, 
+      password: password
+      }
+    }).then((result) => {
+      // fetched data from SQL
+      let resultData = result.data
+
+      // if a match was found in the database based on email and password
+      if (resultData.length == 1) {
+        let loggedUser = {
+          id: resultData[0].id,
+          firstName: resultData[0].firstName,
+          lastName: resultData[0].lastName,
+          classStanding: resultData[0].classStanding,
+          email: resultData[0].email,
+          role: resultData[0].role
+        }
+        
+        /*
+         * This is how the currently-logged user info will be stored. The second line is how to get that info.
+         * On logout, sessionStorage.removeItem() must be used.
+         */
+        sessionStorage.setItem("loggedUser", JSON.stringify(loggedUser))
+
+        console.log(JSON.parse(sessionStorage.getItem("loggedUser")))
+
+        alert('successful');
+        navigate("/home", {replace: true})
+
+      }
+      else if (resultData.length == 0) { // if no match found
+        alert('invalid credentials');
+      }
+      else { // if for some reason, multiple records are returned
+        alert('Something is not right here...');
+        console.log(result)
+      }
     })
   }
-  */
+
 
   return (
     <Container maxWidth="true" disableGutters="true">
@@ -98,10 +133,10 @@ function Login() {
                 width="70%"
               >
 
-                {/* First name field */}
+                {/* Email field */}
                 <TextField
-                  label="Username"
-                  onChange={(event) => setUserName(event.target.value)} // save username from user input
+                  label="Email"
+                  onChange={(event) => setEmail(event.target.value)} // save username from user input
                 />
 
                 {/* Password field */}
@@ -121,7 +156,8 @@ function Login() {
                     textTransform: "none",
                     fontFamily: "Fira Sans",
                     fontSize: 15
-                  }}
+                    }}
+                    onClick={submit}
                 >
                   Sign In
                 </Button>
