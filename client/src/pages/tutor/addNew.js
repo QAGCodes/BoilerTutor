@@ -19,22 +19,39 @@ function AddNew() {
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
     const [roomNo, setRoomNo] = useState("");
+    const [date, setDate] = useState("");
 
     const navigate = useNavigate();
     const [rooms, setRooms] = useState([])
-    const [selection, setSelection] = useState("");
+    const [subjects, setSubjects] = useState([])
+
+    const [subjectSelection, setSubjectSelection] = useState("");
+    const [roomSelection, setRoomSelection] = useState("");
+
 
     useEffect(() => {
         Axios.get('http://localhost:3001/api/room').then((response) => {
             setRooms(response.data)
             console.log("inside axios" + response.data)
         })
+        
+        Axios.get('http://localhost:3001/api/subject').then((response) => {
+            setSubjects(response.data)
+            console.log("inside axios" + response.data)
+        })
+
     }, [])
 
-    const handleChange = (event) => {
-        setSelection(event.target.value);
-        console.log("room selection:" + selection);
+    const handleChangeSubject = (event) => {
+        setSubjectSelection(event.target.value);
+        console.log("subject selection:" + subjectSelection);
       };
+
+      const handleChangeRoom = (event) => {
+        setRoomSelection(event.target.value);
+        console.log("room selection:" + roomSelection);
+      };
+
 
     /*
     const handleSubmit = (event) => {
@@ -50,12 +67,14 @@ function AddNew() {
         console.log(startTime);
         console.log(endTime);
         console.log(roomNo);
+        console.log(date);
         Axios.post('http://localhost:3001/api/addNew', {
           tutorId: 1,
-          subject: subject, 
+          subject: subjectSelection, 
           startTime: startTime, 
           endTime: endTime, 
-          roomNo: selection
+          roomNo: roomSelection,
+          date: date
         }).then((response) => {
             console.log(response);
             alert('success');
@@ -88,10 +107,20 @@ function AddNew() {
 
             <Stack spacing={3}>
 
-                <TextField
-                    label="Subject"
-                    onChange={(event) => setSubject(event.target.value)} // save subject from user input
-                    />
+            <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label" >Subject</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={subjectSelection}
+                    label="Subject Selection"
+                    onChange={handleChangeSubject}
+                >
+                    {subjects.map((currentSubject) =>
+                    <MenuItem value={currentSubject.id}>{currentSubject.name}</MenuItem>
+                    )}
+                </Select>
+                </FormControl>
 
                 <TextField
                     label="Start Time (XX:XX AM/PM)"
@@ -108,15 +137,20 @@ function AddNew() {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={selection}
-                    label="Selection"
-                    onChange={handleChange}
+                    value={roomSelection}
+                    label="Room Selection"
+                    onChange={handleChangeRoom}
                 >
                     {rooms.map((currentRoom) =>
                     <MenuItem value={currentRoom.id}>{currentRoom.roomNo}</MenuItem>
                     )}
                 </Select>
                 </FormControl>
+
+                <TextField
+                    label="Date (MM/DD/YYYY)"
+                    onChange={(event) => setDate(event.target.value)} // save date from user input
+                    />
             
               </Stack>
 

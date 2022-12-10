@@ -13,7 +13,7 @@ import { Card, CardActionArea, CardContent } from "@mui/material";
 function EditAvailability() {
 
   /* Change to be dynamic based on the current tutor who is logged in, currently Michelle */
-  const tutorId = 3;
+  const tutorId = 1;
 
   const [sessions, setAvailableSessions] = useState([])
 
@@ -206,6 +206,34 @@ function EditAvailability() {
                           justifyContent="space-evenly"
                         >
                           {currentSession.room}
+                        </Stack>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+
+
+                  {/* Date */}
+                  <Card
+                    sx={{
+                      boxShadow: "3",
+                      borderRadius: "16px",
+                      width: "60%",
+                      height: "100%",
+                    }}
+                  >
+                    <CardActionArea
+                      width="100%"
+                      height="100%"
+                    >
+                      <CardContent width="100%" height="1000px">
+                        <Stack
+                          margin="0"
+                          direction="row"
+                          width="100%"
+                          height="100%"
+                          justifyContent="space-evenly"
+                        >
+                          {currentSession.date}
                         </Stack>
                       </CardContent>
                     </CardActionArea>
