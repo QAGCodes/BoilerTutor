@@ -39,7 +39,7 @@ app.get("/api/get", (req, res) => {
 
 /* Querying all data from Subject Table */
 app.get("/api/subject", (req, res) => {
-    const sqlSelect = "SELECT * FROM Subject;";
+    const sqlSelect = "SELECT * FROM Subject ORDER BY Subject.name;";
     db.query(sqlSelect, (err, result) => {
         res.send(result);
     });
@@ -51,7 +51,8 @@ app.get("/api/availableSessions", (req, res) => {
     console.log("currentTutor " + currentTutor);
 
     console.log("req = " + req);
-    const sqlGet = "SELECT * FROM Session WHERE tutorId = ?";
+    const sqlGet = "SELECT *, Subject.name AS subjectName, Room.roomNo AS roomNo FROM Session JOIN Subject ON Session.subjectId = Subject.id JOIN Tutor ON Tutor.id = Session.tutorId JOIN Room ON Session.room = Room.id WHERE Tutor.id = ?;"
+    //const sqlGet = "SELECT * FROM Session WHERE tutorId = ?";
     db.query(sqlGet, [currentTutor], (err, result) => {
         res.send(result);
     });
@@ -111,7 +112,7 @@ app.put('/api/selectSession', (req, res) => {
 
 /* Querying all rooms from Room Table */
 app.get("/api/room", (req, res) => {
-    const sqlSelect = "SELECT * FROM Room;";
+    const sqlSelect = "SELECT * FROM Room ORDER BY Room.roomNo;";
     db.query(sqlSelect, (err, result) => {
         res.send(result);
     });

@@ -13,7 +13,7 @@ import { Card, CardActionArea, CardContent } from "@mui/material";
 function EditAvailability() {
 
   /* Change to be dynamic based on the current tutor who is logged in, currently Michelle */
-  const tutorId = 1;
+  const tutorId = 2;
 
   const [sessions, setAvailableSessions] = useState([])
 
@@ -33,7 +33,11 @@ function EditAvailability() {
 
 
   const handleAddNew = (event) => {
-    navigate("/addNew");
+    navigate("/addNew", { // sends subject info to next page
+      state: {
+        Result: tutorId
+      },
+    });
   };
 
   const deleteSession = (deletionId) => {
@@ -128,7 +132,7 @@ function EditAvailability() {
                       justifyContent="space-between"
                       spacing={4}
                 >
-                  {/* Tutor Name */}
+                  {/* Subject Name */}
                   <Card
                     sx={{
                       boxShadow: "3",
@@ -138,6 +142,7 @@ function EditAvailability() {
                     }}
                     disableRipple
                   >
+                    Subject
                     <CardActionArea
                       width="100%"
                       height="100%"
@@ -150,7 +155,7 @@ function EditAvailability() {
                           height="100%"
                           justifyContent="space-evenly"
                         >
-                          {currentSession.subjectId}
+                          {currentSession.subjectName}
                         </Stack>
                       </CardContent>
                     </CardActionArea>
@@ -166,6 +171,7 @@ function EditAvailability() {
 
                     }}
                   >
+                    Time
                     <CardActionArea
                       width="100%"
                       height="100%"
@@ -193,6 +199,7 @@ function EditAvailability() {
                       height: "100%",
                     }}
                   >
+                    Room
                     <CardActionArea
                       width="100%"
                       height="100%"
@@ -205,7 +212,7 @@ function EditAvailability() {
                           height="100%"
                           justifyContent="space-evenly"
                         >
-                          {currentSession.room}
+                          {currentSession.roomNo}
                         </Stack>
                       </CardContent>
                     </CardActionArea>
@@ -221,6 +228,7 @@ function EditAvailability() {
                       height: "100%",
                     }}
                   >
+                    Date
                     <CardActionArea
                       width="100%"
                       height="100%"

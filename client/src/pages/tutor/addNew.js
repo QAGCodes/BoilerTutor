@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Axios from "axios";
 
-function AddNew() {
+function AddNew(props) {
 
     /* Variables for new session that will be added */
     const [tutorId, setTutorId] = useState("");
@@ -27,6 +27,9 @@ function AddNew() {
 
     const [subjectSelection, setSubjectSelection] = useState("");
     const [roomSelection, setRoomSelection] = useState("");
+
+    const location = useLocation();
+    const currentTutorId = location.state.Result; 
 
 
     useEffect(() => {
@@ -69,7 +72,7 @@ function AddNew() {
         console.log(roomNo);
         console.log(date);
         Axios.post('http://localhost:3001/api/addNew', {
-          tutorId: 1,
+          tutorId: currentTutorId,
           subject: subjectSelection, 
           startTime: startTime, 
           endTime: endTime, 
