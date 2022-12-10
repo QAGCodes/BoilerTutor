@@ -14,6 +14,7 @@ import Axios from "axios";
 function AddNew() {
 
     /* Variables for new session that will be added */
+    const [tutorId, setTutorId] = useState("");
     const [subject, setSubject] = useState("");
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
@@ -26,19 +27,33 @@ function AddNew() {
     useEffect(() => {
         Axios.get('http://localhost:3001/api/room').then((response) => {
             setRooms(response.data)
-            console.log(response.data)
+            console.log("inside axios" + response.data)
         })
     }, [])
 
     const handleChange = (event) => {
         setSelection(event.target.value);
-        console.log(event.target.value);
+        console.log("room selection:" + selection);
       };
 
     const handleSubmit = (event) => {
-        console.log("after add new " + selection);
         navigate("/editAvailability");
-      };
+    }
+
+    /*
+    const handleSubmit = (event) => {
+        console.log("submit clicked");
+        Axios.post('http://localhost:3001/api/addNew', {
+          tutorId: 1,
+          subject: subject, 
+          startTime: startTime, 
+          endTime: endTime, 
+          roomNo: selection
+        }).then((response) => {
+          alert('blah blah');
+        })
+      }
+      */
 
     return (
 
@@ -99,7 +114,7 @@ function AddNew() {
             </FormControl>
 
             <Button
-              type="submit"
+              type="button"
               fullWidth
               variant="contained"
               style={{

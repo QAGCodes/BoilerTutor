@@ -48,7 +48,7 @@ app.get("/api/subject", (req, res) => {
 /* Query sessions based on tutor id */
 app.get("/api/availableSessions", (req, res) => {
     const currentTutor = req.query.tutorId;
-    console.log(currentTutor);
+    console.log("currentTutor " + currentTutor);
 
     console.log("req = " + req);
     const sqlGet = "SELECT * FROM Session WHERE tutorId = ?";
@@ -75,6 +75,27 @@ app.get("/api/room", (req, res) => {
     const sqlSelect = "SELECT * FROM Room;";
     db.query(sqlSelect, (err, result) => {
         res.send(result);
+    });
+});
+
+/* Insert new subject and new session from Add New Page */
+app.post("/api/addNew", (req, res) => {
+    console.log("before inserting new session");
+    const tutorId = req.body.tutorId;
+    // studentId is NULL
+    const studentId = "hi";
+    const subject = req.body.subject;
+    const startTime = req.body.startTime;
+    const endTime = req.body.endTime;
+    const room = req.body.roomNo;
+    console.log(tutorId);
+    console.log(subject);
+    console.log(startTime);
+    console.log(endTime);
+    console.log(room);
+    const sqlInsert = "INSERT INTO Session (tutorId, studentId, startTime, endTime, room, subjectId) VALUES (?,?,?,?,?,?);"
+    db.query(sqlInsert, [tutorId, studentId, startTime, endTime, room, subject], (err, result) => {
+        console.log(result);
     });
 });
 

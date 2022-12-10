@@ -13,7 +13,7 @@ import { Card, CardActionArea, CardContent } from "@mui/material";
 function EditAvailability() {
 
   /* Change to be dynamic based on the current tutor who is logged in, currently Michelle */
-  const tutorId = 1;
+  const tutorId = 3;
 
   const [sessions, setAvailableSessions] = useState([])
 
@@ -24,7 +24,7 @@ function EditAvailability() {
             tutorId: tutorId
           }
         }).then((response) => {
-          console.log(response.data)
+          console.log("in edit avail" + response.data)
           setAvailableSessions(response.data)
         })
     }, [])
@@ -68,7 +68,7 @@ function EditAvailability() {
     <>
     <Container maxWidth="xl" disableGutters="true">
     <Grid container direction="row" spacing={2} marginTop="5%">
-        <Stack marginX="15%" width="100%" direction="row" spacing={69}>
+        <Stack marginX="15%" width="100%" direction="row" spacing={77}>
           <h1
             style={{
               textAlign: "left",
