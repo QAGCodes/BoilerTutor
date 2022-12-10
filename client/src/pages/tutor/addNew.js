@@ -36,13 +36,20 @@ function AddNew() {
         console.log("room selection:" + selection);
       };
 
+    /*
     const handleSubmit = (event) => {
         navigate("/editAvailability");
     }
+    */
 
-    /*
+    
     const handleSubmit = (event) => {
         console.log("submit clicked");
+        console.log(tutorId);
+        console.log(subject);
+        console.log(startTime);
+        console.log(endTime);
+        console.log(roomNo);
         Axios.post('http://localhost:3001/api/addNew', {
           tutorId: 1,
           subject: subject, 
@@ -50,10 +57,12 @@ function AddNew() {
           endTime: endTime, 
           roomNo: selection
         }).then((response) => {
-          alert('blah blah');
+            console.log(response);
+            alert('success');
         })
+        navigate("/editAvailability");
       }
-      */
+      
 
     return (
 

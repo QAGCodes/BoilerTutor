@@ -118,8 +118,8 @@ app.get("/api/room", (req, res) => {
 app.post("/api/addNew", (req, res) => {
     console.log("before inserting new session");
     const tutorId = req.body.tutorId;
-    // studentId is NULL
-    const studentId = "hi";
+    // studentId is NULL when session is first created
+    const studentId = null;
     const subject = req.body.subject;
     const startTime = req.body.startTime;
     const endTime = req.body.endTime;
@@ -135,6 +135,7 @@ app.post("/api/addNew", (req, res) => {
     });
 });
 
+/* Delete specified session from Session table */
 app.delete("/api/deleteSession", (req, res) => {
     const session = req.body.id;
     const sqlDelete = "DELETE FROM Session WHERE id = ?";
