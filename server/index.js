@@ -51,7 +51,7 @@ app.get("/api/availableSessions", (req, res) => {
     console.log("currentTutor " + currentTutor);
 
     console.log("req = " + req);
-    const sqlGet = "SELECT *, Subject.name AS subjectName, Room.roomNo AS roomNo FROM Session JOIN Subject ON Session.subjectId = Subject.id JOIN Tutor ON Tutor.id = Session.tutorId JOIN Room ON Session.room = Room.id WHERE Tutor.id = ?;"
+    const sqlGet = "SELECT Session.id AS sessionId, Session.tutorId, Session.studentId, Session.startTime, Session.endTime, Session.room, Session.subjectId, Session.date, Subject.name AS subjectName, Room.roomNo AS roomNo FROM Session JOIN Subject ON Session.subjectId = Subject.id JOIN Tutor ON Tutor.id = Session.tutorId JOIN Room ON Session.room = Room.id WHERE Tutor.id = ?;"
     //const sqlGet = "SELECT * FROM Session WHERE tutorId = ?";
     db.query(sqlGet, [currentTutor], (err, result) => {
         res.send(result);

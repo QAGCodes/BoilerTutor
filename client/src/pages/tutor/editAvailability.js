@@ -13,7 +13,7 @@ import { Card, CardActionArea, CardContent } from "@mui/material";
 function EditAvailability() {
 
   /* Change to be dynamic based on the current tutor who is logged in, currently Michelle */
-  const tutorId = 2;
+  const tutorId = 3;
 
   const [sessions, setAvailableSessions] = useState([])
 
@@ -258,7 +258,7 @@ function EditAvailability() {
                     fontSize: 12,
                     borderRadius: "16px"
                   }}
-                  onClick={() => deleteSession(currentSession.id)}
+                  onClick={() => deleteSession(currentSession.sessionId)}
                   >
                     Delete
                   </Button>
