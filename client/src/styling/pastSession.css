@@ -9,6 +9,10 @@
     border-radius: 0px;
 }
 
+.MuiOutlinedInput-notchedOutline {
+    border-color: #9c9b65;
+  }
+
 containerText {
     float: left;
     font-size: x-large;

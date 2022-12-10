@@ -76,6 +76,16 @@ app.get("/api/tutor", (req, res) => {
   });
 });
 
+/* Get a list of all subjects (Stored Procedure) */
+app.get("/api/getSubjects", (req, res) => {
+    const sqlGet = 
+        "CALL getSubjects()"
+    db.query(sqlGet, (err, result) => {
+        res.send(result[0]);
+    });
+});
+
+
 /* Query sessions based on tutor id */
 app.get("/api/availableSessions", (req, res) => {
     const currentTutor = req.query.tutorId;
@@ -109,10 +119,48 @@ app.get("/api/sessionSelection", (req, res) => {
 /*app.put("/api/selectSession", (req, res) => {
     const sessionId = req.body.id
     const selectedSession = req.body.sessionId
-
+    
     console.log("Subject Id is : " + selectedSession)
     console.log("Session Id is : " + sessionId)
 });*/
+
+
+/* Query for pastSessionsTutors w/ no specific subject (Stored Procedure) */
+app.get("/api/tutorPastSessions", (req, res) => {
+    const tutorId = req.query.tutorId;
+    db.query("CALL getTutorPastSessions(" + tutorId + ")", (err, result) => {
+        res.send(result[0]);
+    })
+})
+
+/* Query for pastSessionsTutors w/ a specific subject (Stored Procedure) */
+app.get("/api/tutorSubjectPastSessions", (req, res) => {
+    const tutorId = req.query.tutorId;
+    const subjectId = req.query.subjectId;
+    
+    db.query("CALL getTutorSubjectPastSessions(" + tutorId + "," + subjectId + ")", (err, result) => {
+        res.send(result[0]);
+    })
+})
+
+/* Query for pastSessionsStudents w/ no specific subject (Stored Procedure) */
+app.get("/api/studentPastSessions", (req, res) => {
+    const studentId = req.query.studentId;
+    db.query("CALL getStudentPastSessions(" + studentId + ")", (err, result) => {
+        res.send(result[0]);
+    })
+})
+
+/* Query for pastSessionsStudents w/ a specific subject (Stored Procedure) */
+app.get("/api/studentSubjectPastSessions", (req, res) => {
+    const studentId = req.query.studentId;
+    const subjectId = req.query.subjectId;
+    
+    db.query("CALL getStudentSubjectPastSessions(" + studentId + "," + subjectId + ")", (err, result) => {
+        res.send(result[0]);
+    })
+})
+
 
 app.put('/api/selectSession', (req, res) => {
     // Get the data for the session to update from the request body
