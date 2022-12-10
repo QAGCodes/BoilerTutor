@@ -8,16 +8,22 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import { Container } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import { Link } from "@mui/material";
 import '../styling/styles.css';
 import Axios from 'axios';
+import { UserContext } from "../context/UserContext";
+
+
 
 function Login() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
+  const {user, setUser} = useContext(UserContext);
+  
 
   /*
   const submit = () => {
@@ -32,6 +38,11 @@ function Login() {
     })
   }
   */
+  
+  const submit = (e) => {
+    e.preventDefault();
+    setUser(username)
+  }
 
   return (
     <Container maxWidth="true" disableGutters="true">
@@ -50,7 +61,7 @@ function Login() {
         >
 
           <h5 align="left" style={{ fontWeight: "bold", marginTop: "40%", marginLeft: "20%", marginRight: "20%", color: "#505e50", fontSize: 55, textAlign: "center"}}>
-            Welcome to BoilerTutor!
+            Welcome to BoilerTutor, {user}!
             <br></br>
             👋
           </h5>
@@ -121,7 +132,8 @@ function Login() {
                     textTransform: "none",
                     fontFamily: "Fira Sans",
                     fontSize: 15
-                  }}
+                    }}
+                    onClick={submit}
                 >
                   Sign In
                 </Button>

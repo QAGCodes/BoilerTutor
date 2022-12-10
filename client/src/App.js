@@ -1,35 +1,43 @@
-import './App.css';
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  BrowserRouter,
+} from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import Signup from "./pages/signup"
-import Login from "./pages/login"
-import Allusers from "./pages/allusers"
-import Test from "./pages/test"
-import Navbar from "./pages/navbar"
+import React, { useState } from "react";
+import Signup from "./pages/signup";
+import Login from "./pages/login";
+import Allusers from "./pages/allusers";
+import Test from "./pages/test";
+import Navbar from "./pages/navbar";
 
 // Student's pages
-import HomeStudent from "./pages/student/homeStudent"
-import PastSessionsStudent from "./pages/student/pastSessionsStudent"
-import SessionSelectionStudent from "./pages/student/sessionSelectionStudent"
-import SubjectSelectionStudent from "./pages/student/subjectSelectionStudent"
+import HomeStudent from "./pages/student/homeStudent";
+import PastSessionsStudent from "./pages/student/pastSessionsStudent";
+import SessionSelectionStudent from "./pages/student/sessionSelectionStudent";
+import SubjectSelectionStudent from "./pages/student/subjectSelectionStudent";
 
 // Tutors's pages
-import EditAvailability from './pages/tutor/editAvailability';
-import HomeTutor from './pages/tutor/homeTutor';
-import PastSessionsTutor from './pages/tutor/pastSessionsTutor';
+import EditAvailability from "./pages/tutor/editAvailability";
+import HomeTutor from "./pages/tutor/homeTutor";
+import PastSessionsTutor from "./pages/tutor/pastSessionsTutor";
+
+// UseContext for user role
+import { UserContext, UserContextProvider } from "./context/UserContext";
 
 function App() {
-
   const location = useLocation();
   const hideNavbar =
-    location.pathname === "/" ||
-    location.pathname === "/login" ? null : (
+    location.pathname === "/" || location.pathname === "/login" ? null : (
       <Navbar></Navbar>
     );
 
   return (
-    <div className = "App">
-      {hideNavbar}
+    <div className="App">
+      <UserContextProvider>
+        {hideNavbar}
         <Routes>
           <Route path="/" element={<Signup />} />
           <Route path="/login" element={<Login />} />
@@ -38,16 +46,25 @@ function App() {
 
           {/* Student pages */}
           <Route path="/homeStudent" element={<HomeStudent />} />
-          <Route path="/pastSessionsStudent" element={<PastSessionsStudent />} />
-          <Route path="/sessionSelectionStudent" element={<SessionSelectionStudent />} />
-          <Route path="/subjectSelectionStudent" element={<SubjectSelectionStudent />} />
+          <Route
+            path="/pastSessionsStudent"
+            element={<PastSessionsStudent />}
+          />
+          <Route
+            path="/sessionSelectionStudent"
+            element={<SessionSelectionStudent />}
+          />
+          <Route
+            path="/subjectSelectionStudent"
+            element={<SubjectSelectionStudent />}
+          />
 
           {/* Tutor pages */}
           <Route path="/editAvailability" element={<EditAvailability />} />
           <Route path="/homeTutor" element={<HomeTutor />} />
           <Route path="/pastSessionsTutor" element={<PastSessionsTutor />} />
         </Routes>
-      
+      </UserContextProvider>
     </div>
   );
 }

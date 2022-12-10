@@ -8,12 +8,15 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext, useContext} from "react";
 import { Container } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import { Link } from "@mui/material";
 import '../styling/styles.css';
 import Axios from 'axios';
+import { UserContext } from "../context/UserContext";
+
+
 
 function Signup() {
   const [firstName, setFirstName] = useState("");
@@ -21,6 +24,8 @@ function Signup() {
   const [emailAddress, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [classStanding, setStanding] = useState("");
+
+  const { user, setUser } = useContext(UserContext);
 
 
   const submit = () => {
@@ -52,7 +57,7 @@ function Signup() {
         >
 
           <h5 align="left" style={{ fontWeight: "bold", marginTop: "40%", marginLeft: "20%", marginRight: "20%", color: "#505e50", fontSize: 55, textAlign: "center"}}>
-            You're almost there!
+            You're almost there, { user }!
           </h5>
 
           <h4 align="left" style={{ fontWeight: "normal", marginTop: "-10%", marginLeft: "20%", marginRight: "20%", color: "#505e50", fontSize: 20, textAlign: "center"}}>
