@@ -19,6 +19,7 @@ function AddNew() {
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
     const [roomNo, setRoomNo] = useState("");
+    const [date, setDate] = useState("");
 
     const navigate = useNavigate();
     const [rooms, setRooms] = useState([])
@@ -66,12 +67,14 @@ function AddNew() {
         console.log(startTime);
         console.log(endTime);
         console.log(roomNo);
+        console.log(date);
         Axios.post('http://localhost:3001/api/addNew', {
           tutorId: 1,
           subject: subjectSelection, 
           startTime: startTime, 
           endTime: endTime, 
-          roomNo: roomSelection
+          roomNo: roomSelection,
+          date: date
         }).then((response) => {
             console.log(response);
             alert('success');
@@ -143,6 +146,11 @@ function AddNew() {
                     )}
                 </Select>
                 </FormControl>
+
+                <TextField
+                    label="Date (MM/DD/YYYY)"
+                    onChange={(event) => setDate(event.target.value)} // save date from user input
+                    />
             
               </Stack>
 

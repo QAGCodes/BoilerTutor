@@ -124,13 +124,14 @@ app.post("/api/addNew", (req, res) => {
     const startTime = req.body.startTime;
     const endTime = req.body.endTime;
     const room = req.body.roomNo;
+    const date = req.body.date;
     console.log(tutorId);
     console.log(subject);
     console.log(startTime);
     console.log(endTime);
     console.log(room);
-    const sqlInsert = "INSERT INTO Session (tutorId, studentId, startTime, endTime, room, subjectId) VALUES (?,?,?,?,?,?);"
-    db.query(sqlInsert, [tutorId, studentId, startTime, endTime, room, subject], (err, result) => {
+    const sqlInsert = "INSERT INTO Session (tutorId, studentId, startTime, endTime, room, subjectId, date) VALUES (?,?,?,?,?,?,?);"
+    db.query(sqlInsert, [tutorId, studentId, startTime, endTime, room, subject, date], (err, result) => {
         console.log(result);
     });
 });

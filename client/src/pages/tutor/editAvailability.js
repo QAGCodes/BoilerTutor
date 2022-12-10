@@ -211,6 +211,34 @@ function EditAvailability() {
                     </CardActionArea>
                   </Card>
 
+
+                  {/* Date */}
+                  <Card
+                    sx={{
+                      boxShadow: "3",
+                      borderRadius: "16px",
+                      width: "60%",
+                      height: "100%",
+                    }}
+                  >
+                    <CardActionArea
+                      width="100%"
+                      height="100%"
+                    >
+                      <CardContent width="100%" height="1000px">
+                        <Stack
+                          margin="0"
+                          direction="row"
+                          width="100%"
+                          height="100%"
+                          justifyContent="space-evenly"
+                        >
+                          {currentSession.date}
+                        </Stack>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+
                   <Button
                   type="button"
                   variant="contained"
