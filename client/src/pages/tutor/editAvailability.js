@@ -29,6 +29,13 @@ function EditAvailability() {
         })
     }, [])
 
+  const navigate = useNavigate();
+
+
+  const handleAddNew = (event) => {
+    navigate("/addNew");
+  };
+
 
 
     /*
@@ -73,6 +80,7 @@ function EditAvailability() {
           </h1>
           <Button
             variant="contained"
+            onClick ={handleAddNew}
             style={{
               width: 150,
               height: 50,
