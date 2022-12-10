@@ -14,7 +14,7 @@ function SubjectSelectionStudent() {
   const [sub, setSub] = useState("")
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/api/subject').then((response) => {
+        Axios.get('http://localhost:3001/api/getSubjects').then((response) => {
             setSubjects(response.data)
             console.log(response.data)
         })
