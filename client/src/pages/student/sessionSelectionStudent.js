@@ -11,7 +11,9 @@ import { Card, CardActionArea, CardContent } from "@mui/material";
 
 function SessionSelectionStudent(props) {
 
-  const loggedInStudent = 8; // Hard coded value to be changed according to logged in user
+  
+  const currUser = JSON.parse(sessionStorage.getItem("loggedUser"));
+  const loggedInStudent = currUser.id;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -163,7 +165,7 @@ function SessionSelectionStudent(props) {
                           height="100%"
                           justifyContent="space-evenly"
                         >
-                          {currentSession.room}
+                          {currentSession.roomNo}
                         </Stack>
                       </CardContent>
                     </CardActionArea>
