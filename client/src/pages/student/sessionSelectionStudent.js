@@ -11,7 +11,7 @@ import { Card, CardActionArea, CardContent } from "@mui/material";
 
 function SessionSelectionStudent(props) {
 
-  const loggedInStudent = 10; // Hard coded value to be changed according to logged in user
+  const loggedInStudent = 8; // Hard coded value to be changed according to logged in user
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -170,6 +170,7 @@ function SessionSelectionStudent(props) {
                   </Card>
 
                   <Button
+                    type="button"
                     variant="contained"
                     style={{
                       width: 150,
@@ -179,7 +180,7 @@ function SessionSelectionStudent(props) {
                       fontSize: 12,
                       borderRadius: "16px"
                     }}
-                    onClick={selectSession(currentSession.id)}
+                    onClick={() => selectSession(currentSession.id)}
                   >
                     Select
                   </Button>

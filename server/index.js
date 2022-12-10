@@ -85,7 +85,7 @@ app.put('/api/selectSession', (req, res) => {
     const studentId = req.body.studentId;
   
     // Construct the MySQL UPDATE statement
-    const sql = `UPDATE Session SET studentId = ? WHERE id = ?`;
+    const sql = `UPDATE Session SET studentId = ? WHERE Session.id = ?`;
     const values = [studentId, id];
 
     // Log the sql and values variables
