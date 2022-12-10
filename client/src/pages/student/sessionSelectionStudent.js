@@ -19,11 +19,6 @@ function SessionSelectionStudent(props) {
   const [availableSessions, setAvailableSessions] = useState([])
 
   useEffect(() => {
-      /*Axios.get('http://localhost:3001/api/subject').then((response) => {
-          setSubjects(response.data)
-          console.log(response.data)
-      })*/
-
       Axios.get('http://localhost:3001/api/sessionSelection', 
       {
         params: {
@@ -33,6 +28,7 @@ function SessionSelectionStudent(props) {
         console.log(response.data)
         setAvailableSessions(response.data)
       })
+
   }, [])
 
   const selectSession = (sessionId) => {
@@ -108,7 +104,7 @@ function SessionSelectionStudent(props) {
                           height="100%"
                           justifyContent="space-evenly"
                         >
-                          {currentSession.tutorId}
+                          {currentSession.tutorName}
                         </Stack>
                       </CardContent>
                     </CardActionArea>

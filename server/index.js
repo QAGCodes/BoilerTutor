@@ -63,7 +63,10 @@ app.get("/api/sessionSelection", (req, res) => {
     console.log(currentSubject);
 
     const sqlSelect = 
-        "SELECT * FROM Session WHERE subjectId = ? AND studentID IS NULL"
+        "Select Session.id, Tutor.firstName AS tutorName, Session.studentId, Session.startTime, Session.endTime, Session.room, Session.subjectId, Session.date FROM Session JOIN Tutor ON Tutor.id = Session.tutorId WHERE subjectId = ? AND studentId IS NULL;"
+
+    console.log(sqlSelect)
+
         /*"JOIN Tutor ON Session.tutorId = Tutor.id"*/
     db.query(sqlSelect, [currentSubject], (err, result) => {
         res.send(result);
