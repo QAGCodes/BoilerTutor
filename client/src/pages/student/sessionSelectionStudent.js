@@ -10,6 +10,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Card, CardActionArea, CardContent } from "@mui/material";
 
 function SessionSelectionStudent(props) {
+
+  const loggedInStudent = 10; // Hard coded value to be changed according to logged in user
+
   const navigate = useNavigate();
   const location = useLocation();
   const currentSubject = location.state.Result; // all current subject information from subject selection page
@@ -32,34 +35,17 @@ function SessionSelectionStudent(props) {
       })
   }, [])
 
-  /*useEffect(() => {
-    Axios.get('http://localhost:3001/api/availableSessions', 
-    {
-      params: {
-        selectedSubject: currentSubject.id
-      }
+  const selectSession = (sessionId) => {
+    Axios.put('http://localhost:3001/api/selectSession', {
+      id: sessionId,
+      studentId: loggedInStudent
     }).then((response) => {
-      console.log(response.data)
-      setAvailableSessions(response.data)
+      console.log(response);
+      //alert('successful');
     })
-  }, []) 
-  const availableSessions = [
-    {
-      tutorName: "Joe Biden",
-      timeSlot: "3:00 PM - 4:00 PM",
-      room: "BHEE 129"
-    },
-    {
-      tutorName: "Donald Trump",
-      timeSlot: "2:00 PM - 3:00 PM",
-      room: "LWSN B158"
-    },
-    {
-      tutorName: "Kamala Harris",
-      timeSlot: "12:00 PM - 1:00 PM",
-      room: "WALC 1055"
-    }
-  ]; */
+
+    //navigate("/homeStudent")
+  }
     
   return (
     <>
@@ -184,15 +170,16 @@ function SessionSelectionStudent(props) {
                   </Card>
 
                   <Button
-                  variant="contained"
-                  style={{
-                    width: 150,
-                    backgroundColor: "#505e50",
-                    textTransform: "none",
-                    fontFamily: "Fira Sans",
-                    fontSize: 12,
-                    borderRadius: "16px"
-                  }}
+                    variant="contained"
+                    style={{
+                      width: 150,
+                      backgroundColor: "#505e50",
+                      textTransform: "none",
+                      fontFamily: "Fira Sans",
+                      fontSize: 12,
+                      borderRadius: "16px"
+                    }}
+                    onClick={selectSession(currentSession.id)}
                   >
                     Select
                   </Button>

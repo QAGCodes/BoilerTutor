@@ -70,6 +70,43 @@ app.get("/api/sessionSelection", (req, res) => {
     });
 });
 
+/* Update student on the session that they select */
+/*app.put("/api/selectSession", (req, res) => {
+    const sessionId = req.body.id
+    const selectedSession = req.body.sessionId
+
+    console.log("Subject Id is : " + selectedSession)
+    console.log("Session Id is : " + sessionId)
+});*/
+
+app.put('/api/selectSession', (req, res) => {
+    // Get the data for the session to update from the request body
+    const id = req.body.id;
+    const studentId = req.body.studentId;
+  
+    // Construct the MySQL UPDATE statement
+    const sql = `UPDATE Session SET studentId = ? WHERE id = ?`;
+    const values = [studentId, id];
+
+    // Log the sql and values variables
+    console.log(sql, values);
+  
+    // Execute the UPDATE statement
+    db.query(sql, values, (error, result) => {
+      if (error) {
+        // If an error occurred, return an error response
+        return res.status(500).json({
+          error: error.message
+        });
+      }
+  
+      // Otherwise, return a success message
+      res.json({
+        message: 'Session updated successfully'
+      });
+    });
+  });
+
 
 app.post("/api/insert", (req, res) => {
 
