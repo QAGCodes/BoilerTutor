@@ -7,6 +7,8 @@ import { Container } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import { Link } from "@mui/material";
 import Axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 import { StyledEngineProvider } from "@mui/material/styles";
 import UpcomingSessions from "../Components/upcomingSessions";
@@ -15,6 +17,9 @@ import UpcomingSessions from "../Components/upcomingSessions";
 function Home() {
   /* Holds all user's data from the Student/Tutor table + role */
   const currUser = JSON.parse(sessionStorage.getItem("loggedUser"));
+
+  const navigate = useNavigate();
+
   const [sessions, setSessions] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [subjects, setSubjects] = useState([]);
@@ -46,6 +51,14 @@ function Home() {
       console.log(result);
     });
   }, []);
+
+  const requestNewClick = (event) => {
+    navigate("/subjectSelectionStudent")
+  }
+
+  const editAvailabilityClick = (event) => {
+    navigate("/editAvailability")
+  }
 
   console.log(sessions, rooms, subjects, tutors);
   return (
@@ -79,11 +92,13 @@ function Home() {
                       fontFamily: "Fira Sans",
                       fontSize: 15,
                     }}
+                    onClick={editAvailabilityClick}
                   >
                     Edit Availability
                   </Button>
                 ) : (
                   <Button
+                    type="button"
                     variant="contained"
                     style={{
                       width: 150,
@@ -93,6 +108,7 @@ function Home() {
                       fontFamily: "Fira Sans",
                       fontSize: 15,
                     }}
+                    onClick={requestNewClick}
                   >
                     Request New
                   </Button>
