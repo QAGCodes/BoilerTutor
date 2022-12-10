@@ -64,7 +64,7 @@ app.get("/api/sessionSelection", (req, res) => {
     console.log(currentSubject);
 
     const sqlSelect = 
-        "Select Session.id, Tutor.firstName AS tutorName, Session.studentId, Session.startTime, Session.endTime, Session.room, Session.subjectId, Session.date FROM Session JOIN Tutor ON Tutor.id = Session.tutorId WHERE subjectId = ? AND studentId IS NULL;"
+        "Select *, Tutor.firstName AS tutorName FROM Session JOIN Tutor ON Tutor.id = Session.tutorId WHERE subjectId = ? AND studentId IS NULL;"
 
     console.log(sqlSelect)
 
