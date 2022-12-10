@@ -12,8 +12,11 @@ import { Card, CardActionArea, CardContent } from "@mui/material";
 
 function EditAvailability() {
 
-  /* Change to be dynamic based on the current tutor who is logged in, currently Michelle */
-  const tutorId = 3;
+  /* Change to be dynamic based on the current tutor who is logged in */
+  const tutorId = JSON.parse(sessionStorage.getItem("loggedUser"));
+  console.log(sessionStorage.getItem("loggedUser"))
+
+  //const tutorId = 3;
 
   const [sessions, setAvailableSessions] = useState([])
 
@@ -21,7 +24,7 @@ function EditAvailability() {
         Axios.get('http://localhost:3001/api/availableSessions', 
         {
           params: {
-            tutorId: tutorId
+            tutorId: tutorId.id
           }
         }).then((response) => {
           console.log("in edit avail" + response.data)
@@ -35,7 +38,7 @@ function EditAvailability() {
   const handleAddNew = (event) => {
     navigate("/addNew", { // sends subject info to next page
       state: {
-        Result: tutorId
+        Result: tutorId.id
       },
     });
   };
