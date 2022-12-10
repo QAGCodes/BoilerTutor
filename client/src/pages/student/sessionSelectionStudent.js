@@ -92,11 +92,13 @@ function SessionSelectionStudent(props) {
                       height: "100%",
                     }}
                   >
+                    Tutor
                     <CardActionArea
                       width="100%"
                       height="100%"
                     >
                       <CardContent width="100%" height="1000px">
+                  
                         <Stack
                           margin="0"
                           direction="row"
@@ -120,6 +122,7 @@ function SessionSelectionStudent(props) {
 
                     }}
                   >
+                    Time
                     <CardActionArea
                       width="100%"
                       height="100%"
@@ -147,6 +150,7 @@ function SessionSelectionStudent(props) {
                       height: "100%",
                     }}
                   >
+                    Room
                     <CardActionArea
                       width="100%"
                       height="100%"
@@ -160,6 +164,34 @@ function SessionSelectionStudent(props) {
                           justifyContent="space-evenly"
                         >
                           {currentSession.room}
+                        </Stack>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+
+                  {/* Date */}
+                  <Card
+                    sx={{
+                      boxShadow: "3",
+                      borderRadius: "16px",
+                      width: "60%",
+                      height: "100%",
+                    }}
+                  >
+                    Date
+                    <CardActionArea
+                      width="100%"
+                      height="100%"
+                    >
+                      <CardContent width="100%" height="1000px">
+                        <Stack
+                          margin="0"
+                          direction="row"
+                          width="100%"
+                          height="100%"
+                          justifyContent="space-evenly"
+                        >
+                          {currentSession.date}
                         </Stack>
                       </CardContent>
                     </CardActionArea>
