@@ -165,7 +165,7 @@ function SessionSelectionStudent(props) {
                           height="100%"
                           justifyContent="space-evenly"
                         >
-                          {currentSession.room}
+                          {currentSession.roomNo}
                         </Stack>
                       </CardContent>
                     </CardActionArea>
