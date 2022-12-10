@@ -70,6 +70,15 @@ app.get("/api/sessionSelection", (req, res) => {
     });
 });
 
+/* Querying all rooms from Room Table */
+app.get("/api/room", (req, res) => {
+    const sqlSelect = "SELECT * FROM Room;";
+    db.query(sqlSelect, (err, result) => {
+        res.send(result);
+    });
+});
+
+
 
 app.post("/api/insert", (req, res) => {
 
