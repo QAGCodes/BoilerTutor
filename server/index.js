@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 /* Get user info + role (Student/Tutor) */
+
 app.get("/api/auth", (req, res) => {
   const currEmail = req.query.email;
   const CurrPassword = req.query.password;
@@ -36,6 +37,22 @@ app.get("/api/auth", (req, res) => {
   });
 });
 
+/* get a specific student's sessions */
+app.get("/api/getUserSession", (req, res) => {
+  const sqlGet = "Select * from Session where studentId = ?";
+  db.query(sqlGet, [req.query.id], (err, result) => {
+    res.send(result);
+  })
+});
+
+// /* get a specific room's record */
+// app.get("/api/getRoom", (req, res) => {
+//   const sqlGet = "Select * from Room where id = ?";
+//   db.query(sqlGet, [req.query.id], (err, result) => {
+//     res.send(result);
+//   })
+// });
+
 app.get("/api/get", (req, res) => {
   const sqlSelect = "SELECT * FROM Student;";
   db.query(sqlSelect, (err, result) => {
@@ -46,6 +63,14 @@ app.get("/api/get", (req, res) => {
 /* Querying all data from Subject Table */
 app.get("/api/subject", (req, res) => {
   const sqlSelect = "SELECT * FROM Subject;";
+  db.query(sqlSelect, (err, result) => {
+    res.send(result);
+  });
+});
+
+/* Querying all data from Subject Table */
+app.get("/api/tutor", (req, res) => {
+  const sqlSelect = "SELECT * FROM Tutor;";
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
