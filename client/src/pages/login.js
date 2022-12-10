@@ -54,7 +54,7 @@ function Login() {
         console.log(JSON.parse(sessionStorage.getItem("loggedUser")))
 
         alert('successful');
-        // navigate("/homeStudent", {replace: true})
+        navigate("/home", {replace: true})
 
       }
       else if (resultData.length == 0) { // if no match found
@@ -62,6 +62,7 @@ function Login() {
       }
       else { // if for some reason, multiple records are returned
         alert('Something is not right here...');
+        console.log(result)
       }
     })
   }
