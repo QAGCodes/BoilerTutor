@@ -99,13 +99,20 @@ app.put('/api/selectSession', (req, res) => {
           error: error.message
         });
       }
-  
       // Otherwise, return a success message
       res.json({
         message: 'Session updated successfully'
       });
     });
   });
+
+/* Querying all rooms from Room Table */
+app.get("/api/room", (req, res) => {
+    const sqlSelect = "SELECT * FROM Room;";
+    db.query(sqlSelect, (err, result) => {
+        res.send(result);
+    });
+});
 
 
 app.post("/api/insert", (req, res) => {
