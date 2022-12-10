@@ -45,43 +45,117 @@ app.get("/api/get", (req, res) => {
 
 /* Querying all data from Subject Table */
 app.get("/api/subject", (req, res) => {
-  const sqlSelect = "SELECT * FROM Subject;";
-  db.query(sqlSelect, (err, result) => {
-    res.send(result);
-  });
+    const sqlSelect = "SELECT * FROM Subject ORDER BY Subject.name;";
+    db.query(sqlSelect, (err, result) => {
+        res.send(result);
+    });
 });
 
 /* Query sessions based on tutor id */
 app.get("/api/availableSessions", (req, res) => {
-  const currentTutor = req.query.tutorId;
-  console.log(currentTutor);
+    const currentTutor = req.query.tutorId;
+    console.log("currentTutor " + currentTutor);
 
-  console.log("req = " + req);
-  const sqlGet = "SELECT * FROM Session WHERE tutorId = ?";
-  db.query(sqlGet, [currentTutor], (err, result) => {
-    res.send(result);
-  });
+    console.log("req = " + req);
+    const sqlGet = "SELECT *, Subject.name AS subjectName, Room.roomNo AS roomNo FROM Session JOIN Subject ON Session.subjectId = Subject.id JOIN Tutor ON Tutor.id = Session.tutorId JOIN Room ON Session.room = Room.id WHERE Tutor.id = ?;"
+    //const sqlGet = "SELECT * FROM Session WHERE tutorId = ?";
+    db.query(sqlGet, [currentTutor], (err, result) => {
+        res.send(result);
+    });
 });
 
 /* Query sessions for the subject */
 app.get("/api/sessionSelection", (req, res) => {
-  const currentSubject = req.query.selectedSubject;
-  console.log(currentSubject);
+    const currentSubject = req.query.selectedSubject;
+    console.log(currentSubject);
 
-  const sqlSelect = "SELECT * FROM Session WHERE subjectId = ?";
-  /*"JOIN Tutor ON Session.tutorId = Tutor.id"*/
-  db.query(sqlSelect, [currentSubject], (err, result) => {
-    res.send(result);
-  });
+    const sqlSelect = 
+        "Select *, Tutor.firstName AS tutorName FROM Session JOIN Tutor ON Tutor.id = Session.tutorId WHERE subjectId = ? AND studentId IS NULL;"
+
+    console.log(sqlSelect)
+
+        /*"JOIN Tutor ON Session.tutorId = Tutor.id"*/
+    db.query(sqlSelect, [currentSubject], (err, result) => {
+        res.send(result);
+    });
 });
+
+/* Update student on the session that they select */
+/*app.put("/api/selectSession", (req, res) => {
+    const sessionId = req.body.id
+    const selectedSession = req.body.sessionId
+
+    console.log("Subject Id is : " + selectedSession)
+    console.log("Session Id is : " + sessionId)
+});*/
+
+app.put('/api/selectSession', (req, res) => {
+    // Get the data for the session to update from the request body
+    const id = req.body.id;
+    const studentId = req.body.studentId;
+  
+    // Construct the MySQL UPDATE statement
+    const sql = `UPDATE Session SET studentId = ? WHERE Session.id = ?`;
+    const values = [studentId, id];
+
+    // Log the sql and values variables
+    console.log(sql, values);
+  
+    // Execute the UPDATE statement
+    db.query(sql, values, (error, result) => {
+      if (error) {
+        // If an error occurred, return an error response
+        return res.status(500).json({
+          error: error.message
+        });
+      }
+      // Otherwise, return a success message
+      res.json({
+        message: 'Session updated successfully'
+      });
+    });
+  });
 
 /* Querying all rooms from Room Table */
 app.get("/api/room", (req, res) => {
-  const sqlSelect = "SELECT * FROM Room;";
-  db.query(sqlSelect, (err, result) => {
-    res.send(result);
-  });
+    const sqlSelect = "SELECT * FROM Room ORDER BY Room.roomNo;";
+    db.query(sqlSelect, (err, result) => {
+        res.send(result);
+    });
 });
+
+/* Insert new subject and new session from Add New Page */
+app.post("/api/addNew", (req, res) => {
+    console.log("before inserting new session");
+    const tutorId = req.body.tutorId;
+    // studentId is NULL when session is first created
+    const studentId = null;
+    const subject = req.body.subject;
+    const startTime = req.body.startTime;
+    const endTime = req.body.endTime;
+    const room = req.body.roomNo;
+    const date = req.body.date;
+    console.log(tutorId);
+    console.log(subject);
+    console.log(startTime);
+    console.log(endTime);
+    console.log(room);
+    const sqlInsert = "INSERT INTO Session (tutorId, studentId, startTime, endTime, room, subjectId, date) VALUES (?,?,?,?,?,?,?);"
+    db.query(sqlInsert, [tutorId, studentId, startTime, endTime, room, subject, date], (err, result) => {
+        console.log(result);
+    });
+});
+
+/* Delete specified session from Session table */
+app.delete("/api/deleteSession", (req, res) => {
+    const session = req.body.id;
+    const sqlDelete = "DELETE FROM Session WHERE id = ?";
+    db.query(sqlDelete, [session], (err, result) => {
+        console.log(result);
+    });
+});
+
+
 
 app.post("/api/insert", (req, res) => {
   const firstName = req.body.firstName;

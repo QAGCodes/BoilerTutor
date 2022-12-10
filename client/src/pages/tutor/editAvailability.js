@@ -13,7 +13,7 @@ import { Card, CardActionArea, CardContent } from "@mui/material";
 function EditAvailability() {
 
   /* Change to be dynamic based on the current tutor who is logged in, currently Michelle */
-  const tutorId = 1;
+  const tutorId = 2;
 
   const [sessions, setAvailableSessions] = useState([])
 
@@ -24,7 +24,7 @@ function EditAvailability() {
             tutorId: tutorId
           }
         }).then((response) => {
-          console.log(response.data)
+          console.log("in edit avail" + response.data)
           setAvailableSessions(response.data)
         })
     }, [])
@@ -33,7 +33,20 @@ function EditAvailability() {
 
 
   const handleAddNew = (event) => {
-    navigate("/addNew");
+    navigate("/addNew", { // sends subject info to next page
+      state: {
+        Result: tutorId
+      },
+    });
+  };
+
+  const deleteSession = (deletionId) => {
+    Axios.delete('http://localhost:3001/api/deleteSession',
+    {
+      data: {
+        id: deletionId
+      },
+    })
   };
 
 
@@ -68,7 +81,7 @@ function EditAvailability() {
     <>
     <Container maxWidth="xl" disableGutters="true">
     <Grid container direction="row" spacing={2} marginTop="5%">
-        <Stack marginX="15%" width="100%" direction="row" spacing={69}>
+        <Stack marginX="15%" width="100%" direction="row" spacing={77}>
           <h1
             style={{
               textAlign: "left",
@@ -119,7 +132,7 @@ function EditAvailability() {
                       justifyContent="space-between"
                       spacing={4}
                 >
-                  {/* Tutor Name */}
+                  {/* Subject Name */}
                   <Card
                     sx={{
                       boxShadow: "3",
@@ -129,6 +142,7 @@ function EditAvailability() {
                     }}
                     disableRipple
                   >
+                    Subject
                     <CardActionArea
                       width="100%"
                       height="100%"
@@ -141,7 +155,7 @@ function EditAvailability() {
                           height="100%"
                           justifyContent="space-evenly"
                         >
-                          {currentSession.subjectId}
+                          {currentSession.subjectName}
                         </Stack>
                       </CardContent>
                     </CardActionArea>
@@ -157,6 +171,7 @@ function EditAvailability() {
 
                     }}
                   >
+                    Time
                     <CardActionArea
                       width="100%"
                       height="100%"
@@ -184,6 +199,7 @@ function EditAvailability() {
                       height: "100%",
                     }}
                   >
+                    Room
                     <CardActionArea
                       width="100%"
                       height="100%"
@@ -196,13 +212,43 @@ function EditAvailability() {
                           height="100%"
                           justifyContent="space-evenly"
                         >
-                          {currentSession.room}
+                          {currentSession.roomNo}
+                        </Stack>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+
+
+                  {/* Date */}
+                  <Card
+                    sx={{
+                      boxShadow: "3",
+                      borderRadius: "16px",
+                      width: "60%",
+                      height: "100%",
+                    }}
+                  >
+                    Date
+                    <CardActionArea
+                      width="100%"
+                      height="100%"
+                    >
+                      <CardContent width="100%" height="1000px">
+                        <Stack
+                          margin="0"
+                          direction="row"
+                          width="100%"
+                          height="100%"
+                          justifyContent="space-evenly"
+                        >
+                          {currentSession.date}
                         </Stack>
                       </CardContent>
                     </CardActionArea>
                   </Card>
 
                   <Button
+                  type="button"
                   variant="contained"
                   style={{
                     width: 150,
@@ -212,6 +258,7 @@ function EditAvailability() {
                     fontSize: 12,
                     borderRadius: "16px"
                   }}
+                  onClick={() => deleteSession(currentSession.id)}
                   >
                     Delete
                   </Button>
