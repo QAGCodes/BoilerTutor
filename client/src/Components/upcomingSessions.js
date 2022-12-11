@@ -6,19 +6,41 @@ import Card from "@mui/material/Card";
 import { Container } from "@mui/system";
 import Grid from "@mui/material/Grid";
 
+import Axios from "axios";
+
 function UpcomingSessions(props) {
+  const cancelHandler = () => {
+    Axios.put('http://localhost:3001/api/selectSession', {
+      id: props.session.id
+    }).then((response) => {
+      console.log(response);
+      //alert('successful');
+    })
+  };
+  const deleteHandler = () => {
+    Axios.delete("http://localhost:3001/api/deleteSession", {
+      params: {
+        id: props.session.id,
+      },
+    }).then((result) => {
+      console.log(result);
+    });
+  };
+
   return (
     <Stack spacing={5}>
       <Card variant="outlined">
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={3} pt={10}>
-            <containerText padding="4px">{props.session.subjectName}</containerText>
+            <containerText padding="4px">
+              {props.session.subjectName}
+            </containerText>
           </Grid>
           <Grid item xs={3} pt={10}>
-                      <containerText>{ props.session.tutorName }</containerText>
+            <containerText>{props.session.tutorName}</containerText>
           </Grid>
           <Grid item xs={3} pt={10}>
-                      <containerText>{props.session.date}</containerText>
+            <containerText>{props.session.date}</containerText>
           </Grid>
           <Grid item xs={3} pt={10}>
             {props.role == "Tutor" ? (
@@ -32,40 +54,26 @@ function UpcomingSessions(props) {
                   fontFamily: "Fira Sans",
                   fontSize: 15,
                 }}
+                onClick={deleteHandler}
               >
                 Cancel
               </Button>
             ) : (
-              <>
-                <Button
-                  variant="contained"
-                  style={{
-                    width: 150,
-                    height: 50,
-                    margin: 5,
-                    backgroundColor: "#505e50",
-                    textTransform: "none",
-                    fontFamily: "Fira Sans",
-                    fontSize: 15,
-                  }}
-                >
-                  Reschedule
-                </Button>
-                <Button
-                  variant="contained"
-                  style={{
-                    width: 150,
-                    height: 50,
-                    margin: 5,
-                    backgroundColor: "#505e50",
-                    textTransform: "none",
-                    fontFamily: "Fira Sans",
-                    fontSize: 15,
-                  }}
-                >
-                  Cancel
-                </Button>
-              </>
+              <Button
+                variant="contained"
+                style={{
+                  width: 150,
+                  height: 50,
+                  margin: 5,
+                  backgroundColor: "#505e50",
+                  textTransform: "none",
+                  fontFamily: "Fira Sans",
+                  fontSize: 15,
+                }}
+                onClick={cancelHandler}
+              >
+                Cancel
+              </Button>
             )}
           </Grid>
         </Grid>

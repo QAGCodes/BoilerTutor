@@ -29,6 +29,7 @@ function Navbar() {
     }
 
     const logoutClicked = (event) => {
+        sessionStorage.removeItem("loggedUser")
         navigate("/login");
     }
 
