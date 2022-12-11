@@ -57,7 +57,9 @@ app.get("/api/auth", (req, res) => {
 
 /* get a specific student's sessions */
 app.get("/api/getUserSession", (req, res) => {
-  const sqlGet = "Select * from Session where studentId = ?";
+
+
+  const sqlGet = req.query.role == "Student" ? "Select * from Session where studentId = ?" : "Select * from Session where tutorId = ?";
   db.query(sqlGet, [req.query.id], (err, result) => {
     res.send(result);
   })
@@ -99,7 +101,9 @@ app.get("/api/getSubjects", (req, res) => {
     const sqlGet = 
         "CALL getSubjects()"
     db.query(sqlGet, (err, result) => {
-        res.send(result[0]);
+        if (result[0] != undefined) {
+            res.send(result[0]);
+        }
     });
 });
 
@@ -245,6 +249,29 @@ app.delete("/api/deleteSession", (req, res) => {
         console.log(result);
     });
 });
+
+app.put('/api/cancelSession', (req, res) => {
+    // Get the data for the session to update from the request body
+    const id = req.body.id;
+  
+    // Construct the MySQL UPDATE statement
+    const sql = `UPDATE Session SET studentId = NULL WHERE Session.id = ?`;
+    const values = [id];
+  
+    // Execute the UPDATE statement
+    db.query(sql, values, (error, result) => {
+      if (error) {
+        // If an error occurred, return an error response
+        return res.status(500).json({
+          error: error.message
+        });
+      }
+      // Otherwise, return a success message
+      res.json({
+        message: 'Session updated successfully'
+      });
+    });
+  });
 
 
 
