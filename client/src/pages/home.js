@@ -9,7 +9,6 @@ import { Link } from "@mui/material";
 import Axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
-
 import { StyledEngineProvider } from "@mui/material/styles";
 import UpcomingSessions from "../Components/upcomingSessions";
 
@@ -24,12 +23,14 @@ function Home() {
   const [rooms, setRooms] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [tutors, setTutors] = useState([]);
+  const [students, setStudents] = useState([]);
 
   useEffect(() => {
     console.log("Hi there");
     Axios.get("http://localhost:3001/api/getUserSession", {
       params: {
         id: currUser.id,
+        role: currUser.role,
       },
     }).then((result) => {
       setSessions(result.data);
@@ -50,15 +51,20 @@ function Home() {
       setTutors(result.data);
       console.log(result);
     });
+
+    Axios.get("http://localhost:3001/api/get").then((result) => {
+      setStudents(result.data);
+      console.log(result);
+    });
   }, []);
 
   const requestNewClick = (event) => {
-    navigate("/subjectSelectionStudent")
-  }
+    navigate("/subjectSelectionStudent");
+  };
 
   const editAvailabilityClick = (event) => {
-    navigate("/editAvailability")
-  }
+    navigate("/editAvailability");
+  };
 
   console.log(sessions, rooms, subjects, tutors);
   return (
@@ -130,11 +136,19 @@ function Home() {
               }
             });
 
-            tutors.forEach((tutor) => {
-              if (tutor.id == session.tutorId) {
-                tutorName = tutor.firstName + " " + tutor.lastName;
-              }
-            });
+            if (currUser.role == "Student") {
+              tutors.forEach((tutor) => {
+                if (tutor.id == session.tutorId) {
+                  tutorName = tutor.firstName + " " + tutor.lastName;
+                }
+              });
+            } else {
+              students.forEach((student) => {
+                if (student.id == session.studentId) {
+                  tutorName = student.firstName + " " + student.lastName;
+                }
+              });
+            }
 
             subjects.forEach((subject) => {
               if (subject.id == session.subjectId) {
@@ -142,11 +156,16 @@ function Home() {
               }
             });
 
-            session["roomNo"] = roomNo
-            session["tutorName"] = tutorName
-            session["subjectName"] = subjectName
+            session["roomNo"] = roomNo;
+            session["tutorName"] = tutorName;
+            session["subjectName"] = subjectName;
 
-            return <UpcomingSessions session={session} key={session.id}></UpcomingSessions>
+            return (
+              <UpcomingSessions
+                session={session}
+                key={session.id}
+              ></UpcomingSessions>
+            );
           })}
       </Container>
     </StyledEngineProvider>

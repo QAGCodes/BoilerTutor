@@ -39,7 +39,9 @@ app.get("/api/auth", (req, res) => {
 
 /* get a specific student's sessions */
 app.get("/api/getUserSession", (req, res) => {
-  const sqlGet = "Select * from Session where studentId = ?";
+
+
+  const sqlGet = req.query.role == "Student" ? "Select * from Session where studentId = ?" : "Select * from Session where tutorId = ?";
   db.query(sqlGet, [req.query.id], (err, result) => {
     res.send(result);
   })
