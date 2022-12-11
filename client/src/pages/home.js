@@ -26,7 +26,7 @@ function Home() {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    console.log("Hi there");
+    console.log("Hi there", currUser);
     Axios.get("http://localhost:3001/api/getUserSession", {
       params: {
         id: currUser.id,
@@ -128,6 +128,7 @@ function Home() {
           sessions.map((session) => {
             let roomNo;
             let tutorName;
+            let studentName
             let subjectName;
 
             rooms.forEach((room) => {
@@ -145,7 +146,7 @@ function Home() {
             } else {
               students.forEach((student) => {
                 if (student.id == session.studentId) {
-                  tutorName = student.firstName + " " + student.lastName;
+                  studentName = student.firstName + " " + student.lastName;
                 }
               });
             }
@@ -157,13 +158,14 @@ function Home() {
             });
 
             session["roomNo"] = roomNo;
-            session["tutorName"] = tutorName;
+            currUser.role == "Tutor" ? session["tutorName"] = tutorName : session["studentName"] = studentName
             session["subjectName"] = subjectName;
 
             return (
               <UpcomingSessions
                 session={session}
                 key={session.id}
+                role={currUser.role}
               ></UpcomingSessions>
             );
           })}

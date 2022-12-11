@@ -226,9 +226,10 @@ app.post("/api/addNew", (req, res) => {
 /* Delete specified session from Session table */
 app.delete("/api/deleteSession", (req, res) => {
     const session = req.body.id;
+    console.log(session)
     const sqlDelete = "DELETE FROM Session WHERE id = ?";
     db.query(sqlDelete, [session], (err, result) => {
-        console.log(result);
+        console.log(result, err);
     });
 });
 

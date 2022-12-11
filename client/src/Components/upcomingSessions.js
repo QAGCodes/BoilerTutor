@@ -10,7 +10,7 @@ import Axios from "axios";
 
 function UpcomingSessions(props) {
   const cancelHandler = () => {
-    Axios.put('http://localhost:3001/api/selectSession', {
+    Axios.put('http://localhost:3001/api/cancelSession', {
       id: props.session.id
     }).then((response) => {
       console.log(response);
@@ -19,9 +19,9 @@ function UpcomingSessions(props) {
   };
   const deleteHandler = () => {
     Axios.delete("http://localhost:3001/api/deleteSession", {
-      params: {
-        id: props.session.id,
-      },
+       data: {
+        id: props.session.id
+      }
     }).then((result) => {
       console.log(result);
     });
@@ -37,7 +37,7 @@ function UpcomingSessions(props) {
             </containerText>
           </Grid>
           <Grid item xs={3} pt={10}>
-            <containerText>{props.session.tutorName}</containerText>
+            <containerText>{props.role == "Tutor" ? props.session.tutorName : props.session.studentName}</containerText>
           </Grid>
           <Grid item xs={3} pt={10}>
             <containerText>{props.session.date}</containerText>
