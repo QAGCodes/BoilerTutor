@@ -53,7 +53,7 @@ function Login() {
 
         console.log(JSON.parse(sessionStorage.getItem("loggedUser")))
 
-        alert('successful');
+        //alert('successful');
         navigate("/home", {replace: true})
 
       }
@@ -180,7 +180,9 @@ function Login() {
                     alignItems: "center",
                     fontSize: 15
                   }}
-                  // onClick={submit}
+                  onClick={(e) => {
+                    navigate("/", {replace: true})
+                  }}
                 >
                   Sign Up
                 </Button>

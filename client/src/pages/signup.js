@@ -14,8 +14,11 @@ import Grid from "@mui/material/Grid";
 import { Link } from "@mui/material";
 import '../styling/styles.css';
 import Axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 function Signup() {
+
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [emailAddress, setEmail] = useState("");
@@ -33,6 +36,7 @@ function Signup() {
       role: role
     }).then(() => {
       alert('successful');
+      navigate("/login", {replace: true})
     })
   }
 
@@ -208,6 +212,9 @@ function Signup() {
                     textTransform: "none",
                     fontFamily: "Fira Sans",
                     fontSize: 15
+                  }}
+                  onClick={(e) => {
+                    navigate("/login", {replace: true})
                   }}
                 >
                   Sign In
