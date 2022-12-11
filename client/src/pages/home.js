@@ -158,7 +158,7 @@ function Home() {
             });
 
             session["roomNo"] = roomNo;
-            currUser.role == "Tutor" ? session["tutorName"] = tutorName : session["studentName"] = studentName
+            currUser.role == "Student" ? session["tutorName"] = tutorName : session["studentName"] = studentName
             session["subjectName"] = subjectName;
 
             return (

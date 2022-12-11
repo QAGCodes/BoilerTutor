@@ -9,6 +9,10 @@ import Grid from "@mui/material/Grid";
 import Axios from "axios";
 
 function UpcomingSessions(props) {
+
+  console.log("PROPS>SESSION")
+  console.log(props.session)
+
   const cancelHandler = () => {
     Axios.put('http://localhost:3001/api/cancelSession', {
       id: props.session.id
@@ -37,7 +41,7 @@ function UpcomingSessions(props) {
             </containerText>
           </Grid>
           <Grid item xs={3} pt={10}>
-            <containerText>{props.role == "Tutor" ? props.session.tutorName : props.session.studentName}</containerText>
+            <containerText>{props.role == "Student" ? props.session.tutorName : props.session.studentName}</containerText>
           </Grid>
           <Grid item xs={3} pt={10}>
             <containerText>{props.session.date}</containerText>
