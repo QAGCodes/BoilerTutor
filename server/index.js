@@ -14,6 +14,24 @@ const db = mysql.createConnection({
   database: "BoilerTutor",
 });
 
+/* READ UNCOMMITED */
+const dbReadUncommited = mysql.createConnection({
+  host: "35.202.200.76",
+  user: "root",
+  password: "ZzLDQJgh93WcUk9yqbBgmSfSYspzyA",
+  database: "BoilerTutor",
+  isolationLevel: "READ UNCOMMITED" 
+});
+
+/* REPEATABLE READ */
+const dbRepeatableRead = mysql.createConnection({
+  host: "35.202.200.76",
+  user: "root",
+  password: "ZzLDQJgh93WcUk9yqbBgmSfSYspzyA",
+  database: "BoilerTutor",
+  isolationLevel: "REPEATABLE READ" 
+});
+
 app.use(cors());
 
 app.use(express.json());
@@ -94,7 +112,7 @@ app.get("/api/availableSessions", (req, res) => {
     console.log("req = " + req);
     const sqlGet = "SELECT Session.id AS sessionId, Session.tutorId, Session.studentId, Session.startTime, Session.endTime, Session.room, Session.subjectId, Session.date, Subject.name AS subjectName, Room.roomNo AS roomNo FROM Session JOIN Subject ON Session.subjectId = Subject.id JOIN Tutor ON Tutor.id = Session.tutorId JOIN Room ON Session.room = Room.id WHERE Tutor.id = ?;"
     //const sqlGet = "SELECT * FROM Session WHERE tutorId = ?";
-    db.query(sqlGet, [currentTutor], (err, result) => {
+    dbReadUncommited.query(sqlGet, [currentTutor], (err, result) => {
         res.send(result);
     });
 });
@@ -110,7 +128,7 @@ app.get("/api/sessionSelection", (req, res) => {
     console.log(sqlSelect)
 
         /*"JOIN Tutor ON Session.tutorId = Tutor.id"*/
-    db.query(sqlSelect, [currentSubject], (err, result) => {
+    dbRepeatableRead.query(sqlSelect, [currentSubject], (err, result) => {
         res.send(result);
     });
 });
@@ -128,7 +146,7 @@ app.get("/api/sessionSelection", (req, res) => {
 /* Query for pastSessionsTutors w/ no specific subject (Stored Procedure) */
 app.get("/api/tutorPastSessions", (req, res) => {
     const tutorId = req.query.tutorId;
-    db.query("CALL getTutorPastSessions(" + tutorId + ")", (err, result) => {
+    dbReadUncommited.query("CALL getTutorPastSessions(" + tutorId + ")", (err, result) => {
         res.send(result[0]);
     })
 })
@@ -138,7 +156,7 @@ app.get("/api/tutorSubjectPastSessions", (req, res) => {
     const tutorId = req.query.tutorId;
     const subjectId = req.query.subjectId;
     
-    db.query("CALL getTutorSubjectPastSessions(" + tutorId + "," + subjectId + ")", (err, result) => {
+    dbReadUncommited.query("CALL getTutorSubjectPastSessions(" + tutorId + "," + subjectId + ")", (err, result) => {
         res.send(result[0]);
     })
 })
@@ -146,7 +164,7 @@ app.get("/api/tutorSubjectPastSessions", (req, res) => {
 /* Query for pastSessionsStudents w/ no specific subject (Stored Procedure) */
 app.get("/api/studentPastSessions", (req, res) => {
     const studentId = req.query.studentId;
-    db.query("CALL getStudentPastSessions(" + studentId + ")", (err, result) => {
+    dbReadUncommited.query("CALL getStudentPastSessions(" + studentId + ")", (err, result) => {
         res.send(result[0]);
     })
 })
@@ -156,7 +174,7 @@ app.get("/api/studentSubjectPastSessions", (req, res) => {
     const studentId = req.query.studentId;
     const subjectId = req.query.subjectId;
     
-    db.query("CALL getStudentSubjectPastSessions(" + studentId + "," + subjectId + ")", (err, result) => {
+    dbReadUncommited.query("CALL getStudentSubjectPastSessions(" + studentId + "," + subjectId + ")", (err, result) => {
         res.send(result[0]);
     })
 })
@@ -175,7 +193,7 @@ app.put('/api/selectSession', (req, res) => {
     console.log(sql, values);
   
     // Execute the UPDATE statement
-    db.query(sql, values, (error, result) => {
+    dbRepeatableRead.query(sql, values, (error, result) => {
       if (error) {
         // If an error occurred, return an error response
         return res.status(500).json({
@@ -214,7 +232,7 @@ app.post("/api/addNew", (req, res) => {
     console.log(endTime);
     console.log(room);
     const sqlInsert = "INSERT INTO Session (tutorId, studentId, startTime, endTime, room, subjectId, date) VALUES (?,?,?,?,?,?,?);"
-    db.query(sqlInsert, [tutorId, studentId, startTime, endTime, room, subject, date], (err, result) => {
+    dbReadUncommited.query(sqlInsert, [tutorId, studentId, startTime, endTime, room, subject, date], (err, result) => {
         console.log(result);
     });
 });
@@ -223,7 +241,7 @@ app.post("/api/addNew", (req, res) => {
 app.delete("/api/deleteSession", (req, res) => {
     const session = req.body.id;
     const sqlDelete = "DELETE FROM Session WHERE id = ?";
-    db.query(sqlDelete, [session], (err, result) => {
+    dbReadUncommited.query(sqlDelete, [session], (err, result) => {
         console.log(result);
     });
 });
